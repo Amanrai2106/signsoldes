@@ -1,65 +1,73 @@
 "use client";
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import { ArrowRight, Users, Target, Lightbulb } from "lucide-react";
 import TransitionLink from "@/components/TransitionLink";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import Image from "next/image";
+
+const teamMembers = [
+  { id: 1, name: "Aman Sharma", role: "Creative Director", image: "/imgs/img-1.png" },
+  { id: 2, name: "Neha Singh", role: "Lead Designer", image: "/imgs/img-2.png" },
+  { id: 3, name: "Rahul Verma", role: "UX Architect", image: "/imgs/img-3.png" },
+  { id: 4, name: "Simran Kaur", role: "Brand Strategist", image: "/imgs/img-4.jpeg" },
+  { id: 5, name: "Karan Patel", role: "Project Manager", image: "/dev/p-1.jpeg" },
+  { id: 6, name: "Priya Desai", role: "3D Visualizer", image: "/dev/p-2.jpeg" },
+  { id: 7, name: "Ankit Rao", role: "Wayfinding Specialist", image: "/dev/p-3.jpeg" },
+  { id: 8, name: "Meera Joshi", role: "Graphic Designer", image: "/dev/p-4.jpeg" },
+  { id: 9, name: "Vikram Nair", role: "Signage Engineer", image: "/imgs/img-1.png" },
+];
+
+const awards = [
+  {
+    year: "2026",
+    items: [
+      {
+        project: "Toyota Music Factory · Irving, TX",
+        award: "Graphis Design Awards, Silver",
+      },
+      {
+        project: "Bel Air Village · Sherman, TX",
+        award: "Graphis Design Awards, Silver",
+      },
+    ],
+  },
+  {
+    year: "2025",
+    items: [
+      {
+        project: "New York Studio Mailer · New York, NY",
+        award: "GDUSA Inhouse Design Awards, Announcements + Invitations",
+      },
+      {
+        project: "CW Prime at St. Regis Longboat Resort · Longboat Key, FL",
+        award: "GDUSA Inhouse Design Awards, Branding + Identity Programs",
+      },
+    ],
+  },
+  {
+    year: "2024",
+    items: [
+      {
+        project: "Post District · Salt Lake City, UT",
+        award: "Mixed-Use Community of the Year, Golden Nugget Award",
+      },
+      {
+        project: "Omni PGA Frisco Resort · Frisco, TX",
+        award: "ICSC Excellence in Community Advancement Award",
+      },
+    ],
+  },
+];
 
 const AboutPage = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-
   return (
-    <main ref={containerRef} className="bg-white min-h-screen text-black overflow-hidden">
+    <main className="min-h-screen text-black overflow-hidden">
       <Nav />
-      
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-200 via-white to-white opacity-50" />
-        <motion.div 
-          style={{ y, opacity }}
-          className="relative z-10 text-center px-4 max-w-4xl mx-auto"
-        >
-          <motion.h1 
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-5xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-b from-black to-gray-500"
-          >
-            We Craft Digital Experiences.
-          </motion.h1>
-          <motion.p 
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-lg md:text-2xl text-gray-600 leading-relaxed"
-          >
-            A team of passionate creators, developers, and strategists dedicated to transforming ideas into impactful reality.
-          </motion.p>
-        </motion.div>
-        
-        {/* Scroll Indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        >
-          <span className="text-xs uppercase tracking-[0.2em] text-gray-500">Scroll</span>
-          <div className="w-[1px] h-16 bg-gradient-to-b from-gray-500 to-transparent" />
-        </motion.div>
-      </section>
 
-      {/* Our Story Section */}
-      <section className="py-20 md:py-32 px-4 md:px-10 relative">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <section className="py-20 md:py-32 px-[5px] relative">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
@@ -119,9 +127,8 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 md:px-10">
+      <section className="py-20">
+        <div className="w-full px-[5px] md:px-[5px] max-w-none">
           <motion.div 
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -169,18 +176,124 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-32 px-4 text-center">
+      <section className="py-20 px-[5px]">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div>
+              <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-orange-500">
+                Our team
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black mt-2">
+                Meet our team
+              </h2>
+              <p className="mt-4 text-sm md:text-base text-gray-600 max-w-xl">
+                A multidisciplinary team of designers, strategists and engineers working together
+                to craft meaningful brand environments and wayfinding systems.
+              </p>
+            </div>
+            <p className="text-xs md:text-sm text-gray-500 max-w-sm">
+              Team data is structured so it can be managed later from an admin panel or CMS
+              without changing this layout.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 md:gap-8">
+            {teamMembers.slice(0, 9).map((member, index) => (
+              <motion.div
+                key={member.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="group flex flex-col items-center text-center rounded-3xl border border-black/5 bg-white shadow-sm hover:shadow-lg hover:border-black/15 transition-all duration-300 p-5 md:p-6"
+              >
+                <div className="relative w-24 h-32 md:w-28 md:h-36 rounded-2xl overflow-hidden mb-4 bg-gray-100">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover"
+                    sizes="120px"
+                  />
+                </div>
+                <h3 className="text-sm md:text-base font-semibold text-black">
+                  {member.name}
+                </h3>
+                <p className="text-xs md:text-sm text-gray-500 mt-1">
+                  {member.role}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-[5px] bg-white">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div>
+              <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-orange-500">
+                Recognition
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black mt-2">
+                Awards and honors
+              </h2>
+              <p className="mt-4 text-sm md:text-base text-gray-600 max-w-xl">
+                Selected recognition for projects delivered with our collaborators across
+                retail, hospitality, workplaces and cultural destinations.
+              </p>
+            </div>
+            <p className="text-xs md:text-sm text-gray-500 max-w-sm">
+              Awards are structured by year so they can be updated or connected to an
+              admin panel in the future.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+            {awards.map((group) => (
+              <div key={group.year} className="space-y-4">
+                <div className="flex items-baseline gap-3">
+                  <span className="text-sm md:text-base font-semibold tracking-[0.25em] uppercase text-gray-400">
+                    {group.year}
+                  </span>
+                  <span className="h-px flex-1 bg-gray-200" />
+                </div>
+                <div className="space-y-4">
+                  {group.items.map((item, index) => (
+                    <motion.div
+                      key={item.project + index}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                      className="flex flex-col gap-1"
+                    >
+                      <p className="text-sm md:text-base font-medium text-black">
+                        {item.project}
+                      </p>
+                      <p className="text-xs md:text-sm text-gray-600">
+                        {item.award}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-32 px-[5px] text-center">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto"
+          className="w-full max-w-none mx-auto"
         >
           <h2 className="text-4xl md:text-7xl font-bold mb-8">Ready to start?</h2>
           <p className="text-xl text-gray-600 mb-10">Let&apos;s build something amazing together.</p>
-          <TransitionLink href="/contact" className="inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition-colors group">
+          <TransitionLink href="/contact" className="inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-500 transition-colors group">
             Get in Touch
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </TransitionLink>

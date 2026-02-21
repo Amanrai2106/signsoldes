@@ -1,320 +1,250 @@
-"use client";
-import React, { use, useRef } from "react";
-import { projects } from "@/data/projects";
-import { posts } from "@/data/posts";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import TransitionLink from "@/components/TransitionLink";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Button } from "@/components/ui/Button";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+'use client';
+
+import React, { use, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Nav from '@/components/Nav';
+import Footer from '@/components/Footer';
+import { projects } from '@/data/projects';
+import { services } from '@/data/services';
+import { posts } from '@/data/posts';
+import { notFound } from 'next/navigation';
+import { Button } from '@/components/ui/Button';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import TransitionLink from '@/components/TransitionLink';
+import Image from 'next/image';
 
 export default function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const projectIndex = projects.findIndex((p) => p.id === id);
-  const project = projects[projectIndex];
+  const project = projects.find((p) => p.id === id);
 
   if (!project) {
     notFound();
   }
 
-  const nextProject = projects[(projectIndex + 1) % projects.length];
-  const prevProject = projects[(projectIndex - 1 + projects.length) % projects.length];
+  // Related Services based on mapping
+  const relatedServices = services.filter(s => 
+    (project as any).relatedServiceIds?.includes(s.id)
+  );
 
+  // State for filtering
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  // Filter posts belonging to this project category
   const projectPosts = posts.filter(p => p.categoryId === id);
 
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  // Apply subcategory filter
+  const filteredPosts = activeFilter === 'all' 
+    ? projectPosts 
+    : projectPosts.filter(p => p.subCategoryId === activeFilter);
 
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const layoutSpans = [
+    "lg:col-span-2 lg:row-span-2",
+    "lg:row-span-1",
+    "lg:row-span-1",
+    "lg:row-span-2",
+    "lg:col-span-2 lg:row-span-1",
+    "lg:row-span-1",
+    "lg:row-span-1",
+    "lg:row-span-2",
+    "lg:row-span-1",
+  ];
 
   return (
-    <main ref={containerRef} className="bg-white min-h-screen text-black selection:bg-orange-500/30 overflow-hidden relative">
-      <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[20%] right-[10%] w-[50vw] h-[50vw] bg-purple-100/40 rounded-full blur-[120px] opacity-60" />
-        <div className="absolute bottom-[20%] left-[10%] w-[40vw] h-[40vw] bg-blue-100/40 rounded-full blur-[120px] opacity-50" />
-      </div>
-
+    <div className="min-h-screen text-black selection:bg-orange-500/30 overflow-x-hidden relative">
       <Nav />
       
-      {/* Hero Section with Parallax */}
-      <section className="relative w-full h-[80vh] flex items-end pb-20 px-6 md:px-12 overflow-hidden">
-        <motion.div 
-          style={{ y: heroY, opacity: heroOpacity }}
-          className="absolute inset-0 z-0"
-        >
-          <Image
-            src={project.src}
-            alt={project.title}
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
-        </motion.div>
-        
-        <div className="relative z-10 w-full mx-auto flex flex-col md:flex-row justify-between items-end gap-10">
-          <div className="max-w-4xl">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <h1 className="text-6xl md:text-9xl font-bold tracking-tighter mb-6 leading-[0.9] text-black">
-                {project.title}
-              </h1>
-            </motion.div>
-            <motion.p 
+      <main className="relative z-10 pt-32 pb-20">
+        <div className="w-full mx-auto px-6 md:px-12">
+          
+          {/* Header & Filter Section */}
+          <div className="mb-16">
+            <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="text-xl md:text-2xl text-gray-800 max-w-2xl leading-relaxed font-medium bg-white/50 backdrop-blur-md p-4 rounded-xl"
+              className="text-4xl md:text-6xl font-bold mb-8 tracking-tighter"
             >
-              {project.description}
-            </motion.p>
-          </div>
-        </div>
-      </section>
+              {project.title}
+            </motion.h1>
 
-      {/* Narrative Section */}
-      <section className="relative z-10 py-32 px-6 md:px-12 w-full mx-auto">
-        <div className="space-y-32">
-            {/* Challenge */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
+            {/* Filter Pills */}
+            <div className="flex flex-wrap gap-3 md:gap-4 pb-4 border-b border-gray-200">
+                <button
+                    onClick={() => setActiveFilter('all')}
+                    className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${
+                        activeFilter === 'all' 
+                        ? 'bg-black text-white border-black' 
+                        : 'bg-transparent text-gray-500 border-gray-300 hover:border-black hover:text-black'
+                    }`}
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold mb-8 text-black">The Challenge</h2>
-                    <p className="text-gray-600 text-lg md:text-xl leading-relaxed mb-8">
-                        Every space tells a story, but sometimes that story gets lost in translation. 
-                        The challenge for {project.title} was to create a cohesive visual language that 
-                        respected the architectural integrity while providing clear, intuitive guidance for users.
-                    </p>
-                    <div className="h-px w-20 bg-black/20" />
-                </motion.div>
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95, rotate: 2 }}
-                    whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl shadow-gray-200"
-                >
-                     <Image
-                        src={project.src}
-                        alt="Challenge details"
-                        fill
-                        className="object-cover hover:scale-110 transition-transform duration-[1.5s] ease-out"
-                      />
-                </motion.div>
+                    All
+                </button>
+                {project.subCategories?.map((sub) => (
+                    <button
+                        key={sub.id}
+                        onClick={() => setActiveFilter(sub.id)}
+                        className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${
+                            activeFilter === sub.id 
+                            ? 'bg-black text-white border-black' 
+                            : 'bg-transparent text-gray-500 border-gray-300 hover:border-black hover:text-black'
+                        }`}
+                    >
+                        {sub.title}
+                    </button>
+                ))}
             </div>
-
-            {/* Solution */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center md:flex-row-reverse">
-                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95, rotate: -2 }}
-                    whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="relative h-[500px] rounded-2xl overflow-hidden order-2 md:order-1 shadow-2xl shadow-gray-200"
-                >
-                     <Image
-                        src={project.src}
-                        alt="Solution details"
-                        fill
-                        className="object-cover hover:scale-110 transition-transform duration-[1.5s] ease-out"
-                      />
-                </motion.div>
-                <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="order-1 md:order-2"
-                >
-                    <h2 className="text-4xl md:text-5xl font-bold mb-8 text-black">The Solution</h2>
-                    <p className="text-gray-600 text-lg md:text-xl leading-relaxed mb-8">
-                        Our approach focused on material integration and high-contrast legibility. 
-                        We utilized materials that complemented the existing environment—brushed metals, 
-                        matte finishes, and illuminated elements where necessary.
-                    </p>
-                    <div className="h-px w-20 bg-black/20" />
-                </motion.div>
-            </div>
-        </div>
-      </section>
-
-      {/* Full Width Image Parallax */}
-      <section className="relative w-full h-[80vh] overflow-hidden my-20">
-         <motion.div 
-            style={{ scale: useTransform(scrollYProgress, [0.4, 1], [1, 1.2]) }}
-            className="absolute inset-0"
-         >
-             <Image
-                src={project.src}
-                alt="Full width view"
-                fill
-                className="object-cover"
-             />
-         </motion.div>
-         <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-             <motion.h3 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-5xl md:text-8xl font-bold text-center text-white drop-shadow-xl"
-             >
-                 {project.title}
-             </motion.h3>
-         </div>
-      </section>
-
-      {/* Subcategories Section */}
-      <section className="relative z-10 py-24 px-6 md:px-12 w-full mx-auto bg-white/80 backdrop-blur-sm">
-        <motion.h2 
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="text-sm font-bold mb-16 text-orange-600 uppercase tracking-widest flex items-center gap-4"
-        >
-          <span className="w-8 h-[1px] bg-orange-600"></span>
-          Explore Categories
-        </motion.h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {project.subCategories?.map((sub, index) => (
-            <TransitionLink key={sub.id} href={`/projects/${project.id}/${sub.id}`}>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100 cursor-pointer shadow-lg hover:shadow-xl transition-shadow duration-500"
-              >
-                <Image
-                  src={sub.image}
-                  alt={sub.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-500" />
-                <div className="absolute inset-0 flex flex-col justify-end p-8">
-                  <h3 className="text-3xl font-bold text-white mb-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                    {sub.title}
-                  </h3>
-                  <div className="flex items-center gap-2 text-white/80 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                    <span className="text-sm font-medium uppercase tracking-wider">View Projects</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </motion.div>
-            </TransitionLink>
-          ))}
-        </div>
-      </section>
-
-      {/* Featured Projects Demo Section */}
-      {projectPosts.length > 0 && (
-        <section className="relative z-10 py-24 px-6 md:px-12 w-full mx-auto border-t border-black/5">
-          <div className="flex justify-between items-end mb-16">
-             <motion.h2 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="text-sm font-bold text-orange-600 uppercase tracking-widest flex items-center gap-4"
-            >
-              <span className="w-8 h-[1px] bg-orange-600"></span>
-              Featured Projects
-            </motion.h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {projectPosts.slice(0, 4).map((post, index) => (
-              <motion.div
-                key={post.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group cursor-pointer"
-              >
-                <div className="relative aspect-video overflow-hidden rounded-xl bg-gray-100 mb-6">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
-                </div>
-                <div className="flex flex-col gap-2">
-                   <div className="flex items-center gap-3 mb-2">
-                    <span className="px-3 py-1 rounded-full bg-orange-100 text-orange-600 text-xs font-bold uppercase tracking-wider">
-                      {project.subCategories?.find(s => s.id === post.subCategoryId)?.title || 'Project'}
-                    </span>
-                   </div>
-                  <h3 className="text-2xl font-bold text-black group-hover:text-orange-600 transition-colors duration-300">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-500 line-clamp-2">
-                    {post.description}
+          {/* Posts Grid - Bento layout */}
+          <section className="mt-10">
+            {filteredPosts.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[220px] md:auto-rows-[260px] lg:auto-rows-[280px] gap-4 md:gap-6">
+                <AnimatePresence mode="popLayout">
+                  {filteredPosts.map((post, index) => {
+                    const subCategoryTitle = project.subCategories?.find(
+                      (s) => s.id === post.subCategoryId
+                    )?.title;
+
+                    return (
+                      <TransitionLink
+                        key={post.id}
+                        href={`/projects/${id}/${post.subCategoryId}/${post.id}`}
+                        className={`group relative overflow-hidden rounded-3xl bg-gray-200 ${layoutSpans[index] || ""}`}
+                      >
+                        <motion.div
+                          layout
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -20 }}
+                          transition={{ duration: 0.3 }}
+                          className="relative w-full h-full"
+                        >
+                          <Image
+                            src={post.image}
+                            alt={post.title}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                          <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                            {subCategoryTitle && (
+                              <p className="text-orange-400 text-xs font-bold uppercase tracking-widest mb-2">
+                                {subCategoryTitle}
+                              </p>
+                            )}
+                            <h3 className="text-xl md:text-2xl font-bold text-white mb-2 leading-tight">
+                              {post.title}
+                            </h3>
+                            <div className="flex items-center justify-between mt-3 border-t border-white/20 pt-3">
+                              <span className="text-gray-200 text-xs md:text-sm line-clamp-1">
+                                {post.description}
+                              </span>
+                              <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-md group-hover:bg-white group-hover:text-black transition-colors">
+                                <ArrowUpRight className="w-4 h-4" />
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      </TransitionLink>
+                    );
+                  })}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <div className="py-20 text-center text-gray-500">
+                <p>No projects found in this category yet.</p>
+              </div>
+            )}
+          </section>
+
+          {/* Related Services Section */}
+          {relatedServices.length > 0 && (
+            <section className="mt-32">
+              <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div className="max-w-2xl">
+                  <h2 className="text-3xl md:text-5xl font-bold tracking-tighter mb-4 uppercase">
+                    Our Specialized Services
+                  </h2>
+                  <p className="text-gray-600 text-lg">
+                    We offer a range of specialized services tailored for {project.title.toLowerCase()} environments.
                   </p>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-      )}
+                <TransitionLink 
+                  href="/services" 
+                  className="group flex items-center gap-2 text-black font-bold uppercase tracking-widest text-sm"
+                >
+                  Explore All Services
+                  <div className="w-8 h-8 rounded-full border border-black/10 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-300">
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </TransitionLink>
+              </div>
 
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {relatedServices.map((service, idx) => (
+                  <motion.div
+                    key={service.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                  >
+                    <TransitionLink 
+                      href={`/services/${service.id}`}
+                      className="group block relative aspect-[4/3] overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 p-8"
+                    >
+                      <div className="relative z-10 h-full flex flex-col justify-between">
+                        <div>
+                          <p className="text-orange-500 text-xs font-bold uppercase tracking-widest mb-2">Service {service.id}</p>
+                          <h3 className="text-black text-2xl font-bold mb-4">{service.title}</h3>
+                          <p className="text-gray-600 text-sm line-clamp-3 mb-4">
+                            {service.description}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2 text-black font-bold text-xs uppercase tracking-widest group-hover:text-orange-500 transition-colors">
+                          Learn More
+                          <ArrowUpRight className="w-4 h-4" />
+                        </div>
+                      </div>
+                      
+                      {/* Background hover effect */}
+                      <div className="absolute inset-0 bg-gray-50 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                    </TransitionLink>
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+          )}
 
-
-      {/* Next/Prev Navigation */}
-      <section className="relative z-10 py-20 px-6 md:px-12 border-t border-black/10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-            <TransitionLink href={`/projects/${prevProject.id}`} className="group flex items-center gap-4 text-gray-500 hover:text-black transition-colors">
-                <ArrowLeft size={32} className="group-hover:-translate-x-2 transition-transform" />
-                <div className="text-right md:text-left">
-                    <p className="text-sm font-bold uppercase tracking-widest mb-1">Previous Project</p>
-                    <h4 className="text-2xl font-bold">{prevProject.title}</h4>
-                </div>
-            </TransitionLink>
+          {/* CTA Section */}
+          <section className="mt-32 relative overflow-hidden rounded-3xl bg-white border border-gray-200 p-12 md:p-24 text-center shadow-xl shadow-gray-200/50">
+            <div className="relative z-10 max-w-3xl mx-auto">
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-black">
+                    Ready to start your next project?
+                </h2>
+                <p className="text-xl text-gray-600 mb-10 leading-relaxed">
+                    Let&apos;s collaborate to bring the vision of {project.title.toLowerCase()} projects to life with precision and creativity.
+                </p>
+                <Button 
+                    href="/contact"
+                    className="h-14 px-8 rounded-full text-base"
+                    variant="primary"
+                >
+                    Get in Touch
+                </Button>
+            </div>
             
-            <div className="h-12 w-px bg-black/10 hidden md:block"></div>
+            {/* Background decorative elements */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
+                <div className="absolute top-[-50%] left-[-20%] w-[80%] h-[80%] bg-orange-100 rounded-full blur-[100px]" />
+                <div className="absolute bottom-[-50%] right-[-20%] w-[80%] h-[80%] bg-blue-100 rounded-full blur-[100px]" />
+            </div>
+          </section>
 
-            <TransitionLink href={`/projects/${nextProject.id}`} className="group flex items-center gap-4 text-gray-500 hover:text-black transition-colors text-right">
-                <div className="text-left md:text-right">
-                    <p className="text-sm font-bold uppercase tracking-widest mb-1">Next Project</p>
-                    <h4 className="text-2xl font-bold">{nextProject.title}</h4>
-                </div>
-                <ArrowRight size={32} className="group-hover:translate-x-2 transition-transform" />
-            </TransitionLink>
         </div>
-      </section>
-
-      {/* CTA */}
-      <section className="relative z-10 py-32 px-6 text-center bg-gray-50 border-t border-black/5">
-        <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-        >
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 text-black">Ready to start your project?</h2>
-            <Button href={`/contact?category=Project&subcategory=${encodeURIComponent(project.title)}`} variant="primary" className="text-lg px-12 py-6">
-                Get in Touch
-            </Button>
-        </motion.div>
-      </section>
-      
-      <Footer hideContactCta={true} />
-    </main>
+      </main>
+      <Footer />
+    </div>
   );
 }

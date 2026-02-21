@@ -2,70 +2,102 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
-const words = [
-  "Welcome", // English
-  "مرحباً", // Arabic (Dubai)
-  "Bienvenido", // Spanish
-  "Bienvenue", // French
-  "Willkommen", // German
-  "Benvenuto", // Italian
-  "ようこそ", // Japanese
-  "欢迎", // Chinese
-  "Добро пожаловать", // Russian
-  "स्वागत है", // Hindi (final one)
-];
+const title = "Signsol Design";
 
 const Loader = () => {
-
-  const [index, setIndex] = useState(0);
-  const [fade, setFade] = useState(true);
   const [done, setDone] = useState(false);
+  const [shouldShow, setShouldShow] = useState(false);
   const loaderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (index < words.length - 1) {
-      const interval = setInterval(() => {
-        setFade(false); // fade out
-        setTimeout(() => {
-          setIndex((prev) => prev + 1);
-          setFade(true); // fade in new word
-        }, 150);
-      }, 300);
-
-      return () => clearInterval(interval);
+    const hasShownLoader = sessionStorage.getItem("hasShownLoader");
+    if (hasShownLoader) {
+      setDone(true);
     } else {
-      // Hindi reached → play exit animation
-      const timeout = setTimeout(() => {
-        if (loaderRef.current) {
-          gsap.to(loaderRef.current, {
-            scale: 0.5,
-            y: -200, // move upward
-            opacity: 0,
-            duration: 1,
-            ease: "power3.inOut",
-            onComplete: () => setDone(true), // remove after animation
-          });
-        }
-      }, 1200);
-
-      return () => clearTimeout(timeout);
+      setShouldShow(true);
     }
-  }, [index]);
+  }, []);
 
-  if (done) return null; // fully unmount after animation
+  useEffect(() => {
+    if (!shouldShow || done) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          sessionStorage.setItem("hasShownLoader", "true");
+          setDone(true);
+        },
+      });
+
+      const chars = gsap.utils.toArray<HTMLSpanElement>(".loader-char");
+
+      tl.fromTo(
+        chars,
+        { y: "100%", opacity: 0 },
+        {
+          y: "0%",
+          opacity: 1,
+          duration: 0.5,
+          ease: "power3.out",
+          stagger: 0.05,
+        }
+      );
+
+      tl.to(chars, {
+        opacity: 0,
+        y: "-40%",
+        duration: 0.6,
+        ease: "power3.inOut",
+      });
+
+      tl.to(
+        ".loader-panel-left",
+        {
+          x: "-100%",
+          duration: 0.8,
+          ease: "power3.inOut",
+        },
+        "-=0.3"
+      );
+
+      tl.to(
+        ".loader-panel-right",
+        {
+          x: "100%",
+          duration: 0.8,
+          ease: "power3.inOut",
+        },
+        "<"
+      );
+    }, loaderRef);
+
+    return () => ctx.revert();
+  }, [shouldShow, done]);
+
+  if (done || !shouldShow) return null;
 
   return (
     <div
       ref={loaderRef}
-      className="fixed inset-0 z-[99999] h-[100dvh] w-full flex items-center justify-center bg-white text-black text-4xl font-bold"
+      className="fixed inset-0 z-[99999] h-[100dvh] w-full overflow-hidden"
     >
-      <span
-        className={`transition-opacity duration-500 ${
-          fade ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        {words[index]}
-      </span>
+      <div className="absolute inset-0 flex">
+        <div className="loader-panel-left flex-1 bg-white" />
+        <div className="loader-panel-right flex-1 bg-white" />
+      </div>
+
+      <div className="relative z-10 flex h-full w-full items-center justify-center">
+        <span className="text-4xl md:text-6xl font-bold tracking-[0.25em] uppercase text-black">
+          {title.split("").map((char, index) => (
+            <span
+              key={index}
+              className="loader-char inline-block translate-y-full"
+            >
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
+        </span>
+      </div>
     </div>
   );
 };

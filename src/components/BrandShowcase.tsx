@@ -33,7 +33,6 @@ const BrandShowcase = () => {
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-white text-black">
-      {/* Background Layer */}
       <AnimatePresence mode="popLayout">
         <motion.div
           key={activeBrand.id}
@@ -47,10 +46,9 @@ const BrandShowcase = () => {
             src={activeBrand.bg}
             alt={activeBrand.name}
             fill
-            className="object-cover opacity-10 blur-sm"
+            className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent" />
         </motion.div>
       </AnimatePresence>
 

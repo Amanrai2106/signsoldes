@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import TransitionLink from "./TransitionLink";
 
 const ScrollRotateCard = ({ children, className }: { children: React.ReactNode; className?: string }) => {
   const ref = useRef(null);
@@ -298,91 +300,52 @@ const AboutGrid = () => {
     <section id="about-grid" className="bg-white text-black font-inter">
       <div className="w-full flex flex-col">
         <div className="flex flex-col w-full">
-          {/* Card 2: About Us (Merged with Profile) */}
-          <ScrollRotateCard
-            className="w-full min-h-screen flex flex-col bg-gray-50 p-8 md:p-20 border-b border-black/5"
-          >
-            {/* Merged Profile Header */}
-             <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-center mb-12 md:mb-20 border-b border-black/5 pb-8 md:pb-10">
-                <div>
-                  <h2 className="text-[clamp(2rem,5vw,4rem)] font-bold mb-4 font-aboreto text-black">Signsol Design</h2>
-                  <p className="text-gray-600 text-[clamp(1rem,1.5vw,1.25rem)] flex items-center gap-2">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
-                    THANE, IN • <TimeDisplay />
+          <ScrollRotateCard className="w-full border-b border-black/5 bg-white py-16 md:py-24 px-[5px]">
+            <div className="w-full bg-white rounded-[2.5rem] shadow-[0_30px_80px_rgba(15,23,42,0.12)] overflow-hidden flex flex-col md:flex-row">
+              <div className="flex-1 px-6 py-10 md:px-12 md:py-16 flex flex-col justify-center gap-6">
+                <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-orange-500">
+                  Signsol Design Book
+                </p>
+                <div className="space-y-4">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight text-black">
+                    Graphic connections<br />in architecture.
+                  </h2>
+                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+                    Architectural signage at Signsol Design is about linking people,
+                    buildings and brands. We create systems that are easy to read and
+                    feel naturally built into every space.
                   </p>
                 </div>
-                <div className="flex gap-4 md:gap-6 mt-8 md:mt-0">
-                  <div className="p-3 md:p-4 bg-black/5 rounded-full hover:bg-black/10 cursor-pointer transition-colors">
-                    <MailIcon className="w-[clamp(1.25rem,2vw,1.5rem)] h-[clamp(1.25rem,2vw,1.5rem)]" />
-                  </div>
-                  <div className="p-3 md:p-4 bg-black/5 rounded-full hover:bg-black/10 cursor-pointer transition-colors">
-                    <GithubIcon className="w-[clamp(1.25rem,2vw,1.5rem)] h-[clamp(1.25rem,2vw,1.5rem)]" />
-                  </div>
-                  <div className="p-3 md:p-4 bg-black/5 rounded-full hover:bg-black/10 cursor-pointer transition-colors">
-                    <XIcon className="w-[clamp(1.25rem,2vw,1.5rem)] h-[clamp(1.25rem,2vw,1.5rem)]" />
-                  </div>
+                <p className="text-sm md:text-base text-gray-500 leading-relaxed">
+                  From façade identities and parking guidance to lobby directories and
+                  safety information, each sign is detailed to support the architecture
+                  and the experience of moving through a place.
+                </p>
+                <div className="pt-2 flex flex-wrap items-center gap-4">
+                  <TransitionLink href="/about" className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm md:text-base font-medium text-white hover:bg-orange-500 transition-colors">
+                    Book details
+                    <span className="text-lg leading-none">→</span>
+                  </TransitionLink>
+                  <p className="hidden md:flex items-center gap-2 text-xs text-gray-400 uppercase tracking-[0.2em]">
+                    Thane, IN
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+                    <TimeDisplay />
+                  </p>
                 </div>
-             </div>
-
-            <div className="w-full flex flex-col justify-center flex-grow">
-              <h3 className="text-[clamp(2.5rem,8vw,6rem)] font-bold mb-8 md:mb-12 leading-[0.9]">
-                About <span className="text-gray-500 italic font-serif">Us.</span>
-              </h3>
-              <p className="text-gray-600 mb-8 md:mb-12 leading-relaxed text-[clamp(1.125rem,2vw,1.875rem)] max-w-none">
-                Welcome to <strong className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Signsol Design</strong>, your premier destination for highly creative and professional signage design solutions. We collaborate with top <span className="text-black italic font-serif">architectural companies</span> pan India and specialize in providing turn-key solutions for all your exterior and interior signage strategy and designing needs.
-              </p>
-              <p className="text-gray-600 mb-12 md:mb-16 leading-relaxed text-[clamp(1.125rem,2vw,1.875rem)] max-w-none">
-                 Our highly qualified and experienced team of visualizers, designers, and craftsmen are dedicated to creating <strong className="text-orange-400 font-serif italic">artistic yet functional designs</strong>. We excel in adapting our sign systems to perfectly match the &apos;look and feel&apos; of our client&apos;s brands.
-              </p>
-              <div className="flex flex-wrap gap-3 md:gap-4">
-                {["Wayfinding", "Signage Strategy", "Experiential Design", "Turn-key Solutions", "Pan India", "Brand Adaptation"].map(
-                  (tag, i) => (
-                    <span
-                      key={i}
-                      className="px-6 md:px-8 py-2 md:py-3 bg-black/5 rounded-full text-[clamp(0.875rem,1.2vw,1.125rem)] text-gray-600 border border-black/5 hover:border-black/20 transition-colors cursor-default"
-                    >
-                      {tag}
-                    </span>
-                  )
-                )}
+              </div>
+              <div className="flex-1 relative min-h-[260px] md:min-h-[380px] lg:min-h-[440px] bg-gray-100 overflow-hidden">
+                <Image
+                  src="/dev/p-4.jpeg"
+                  alt="Signage and wayfinding design"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 40vw, 80vw"
+                  priority={false}
+                />
               </div>
             </div>
           </ScrollRotateCard>
         </div>
-
-        {/* Card 3: Design Philosophy */}
-        <ScrollRotateCard
-          className="w-full min-h-screen bg-gray-100 p-8 md:p-20 border-b border-black/5 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 overflow-hidden"
-        >
-          <div className="flex-1 z-10 w-full">
-            <p className="text-[clamp(0.875rem,1.5vw,1rem)] font-bold text-gray-500 mb-6 uppercase tracking-widest">
-              Our Approach
-            </p>
-            <h3 className="text-[clamp(3rem,8vw,7rem)] font-bold mb-8 md:mb-12 leading-tight">
-              Meaningful <span className="text-orange-500 italic font-serif">connections.</span>
-            </h3>
-            <p className="text-gray-600 mb-8 md:mb-12 w-full text-[clamp(1.125rem,2vw,1.875rem)]">
-              From Experiential Design to wayfinding, we design meaningful connections between people and places.
-            </p>
-            <ul className="space-y-4 md:space-y-6 text-gray-600 text-[clamp(1.125rem,1.5vw,1.5rem)]">
-              <li className="flex items-center gap-3 md:gap-4">
-                <span className="w-[clamp(0.5rem,1vw,0.75rem)] h-[clamp(0.5rem,1vw,0.75rem)] bg-orange-500 rounded-full"></span>
-                Turn-key Solutions
-              </li>
-              <li className="flex items-center gap-3 md:gap-4">
-                <span className="w-[clamp(0.5rem,1vw,0.75rem)] h-[clamp(0.5rem,1vw,0.75rem)] bg-orange-500 rounded-full"></span>
-                System Production Efficiency
-              </li>
-              <li className="flex items-center gap-3 md:gap-4">
-                <span className="w-[clamp(0.5rem,1vw,0.75rem)] h-[clamp(0.5rem,1vw,0.75rem)] bg-orange-500 rounded-full"></span>
-                Brand-Aligned Aesthetics
-              </li>
-            </ul>
-          </div>
-          <div className="flex-1 flex justify-center items-center scale-150 md:scale-[2.5]">
-             <Clock />
-          </div>
-        </ScrollRotateCard>
 
         {/* Card 4: Pan India Presence */}
         <ScrollRotateCard

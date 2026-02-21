@@ -21,3 +21,56 @@ model ContactSubmission {
   message      String
   createdAt    DateTime @default(now())
 }
+
+model Service {
+  id                Int                  @id @default(autoincrement())
+  title             String
+  description       String
+  details           Json?
+  relatedProjectIds Json?
+  subCategories     ServiceSubCategory[]
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+}
+
+model ServiceSubCategory {
+  id        Int      @id @default(autoincrement())
+  key       String
+  title     String
+  image     String
+  serviceId Int
+  service   Service  @relation(fields: [serviceId], references: [id])
+}
+
+model ProjectCategory {
+  id                 String                @id
+  title              String
+  description        String
+  src                String
+  color              String?
+  relatedServiceIds  Json?
+  subCategories      ProjectSubCategory[]
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+}
+
+model ProjectSubCategory {
+  id        Int              @id @default(autoincrement())
+  key       String
+  title     String
+  image     String
+  projectId String
+  project   ProjectCategory  @relation(fields: [projectId], references: [id])
+}
+
+model Post {
+  id            String   @id
+  title         String
+  description   String
+  image         String
+  categoryId    String
+  subCategoryId String
+  type          String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

@@ -82,7 +82,7 @@ export const posts: Post[] = [
     title: "City Center Pylon",
     description: "50ft illuminated pylon sign for city center.",
     image: "/imgs/img-4.jpeg",
-    categoryId: "2",
+    categoryId: "3",
     subCategoryId: "monument",
     type: "service"
   }

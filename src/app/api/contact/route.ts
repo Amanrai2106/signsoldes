@@ -96,11 +96,14 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const url = new URL(req.url);
+    const takeParam = url.searchParams.get("take");
+    const take = Math.min(Math.max(Number(takeParam || 5), 1), 100);
     const latest = await prisma.contactSubmission.findMany({
       orderBy: { createdAt: "desc" },
-      take: 5,
+      take,
     });
     return NextResponse.json({ ok: true, latest, count: latest.length });
   } catch {

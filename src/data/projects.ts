@@ -9,7 +9,8 @@ export const projects = [
       { id: "apartments", title: "Luxury Apartments", image: "/imgs/img-1.png" },
       { id: "townships", title: "Townships", image: "/imgs/img-2.png" },
       { id: "villas", title: "Private Villas", image: "/imgs/img-3.png" },
-    ]
+    ],
+    relatedServiceIds: [1, 2]
   },
   {
     id: "commercial",
@@ -21,7 +22,8 @@ export const projects = [
       { id: "malls", title: "Shopping Malls", image: "/imgs/img-4.jpeg" },
       { id: "complexes", title: "Business Complexes", image: "/dev/p-1.jpeg" },
       { id: "hotels", title: "Hotels & Resorts", image: "/dev/p-2.jpeg" },
-    ]
+    ],
+    relatedServiceIds: [1, 2, 3]
   },
   {
     id: "plotting",
@@ -32,7 +34,8 @@ export const projects = [
     subCategories: [
       { id: "land-development", title: "Land Development", image: "/imgs/img-1.png" },
       { id: "industrial-parks", title: "Industrial Parks", image: "/imgs/img-2.png" },
-    ]
+    ],
+    relatedServiceIds: [2]
   },
   {
     id: "office",
@@ -43,7 +46,8 @@ export const projects = [
     subCategories: [
       { id: "corporate-hq", title: "Corporate HQ", image: "/imgs/img-3.png" },
       { id: "coworking", title: "Co-working Spaces", image: "/imgs/img-4.jpeg" },
-    ]
+    ],
+    relatedServiceIds: [1, 3]
   },
   {
     id: "educational",
@@ -54,7 +58,8 @@ export const projects = [
     subCategories: [
       { id: "universities", title: "Universities", image: "/dev/p-1.jpeg" },
       { id: "schools", title: "K-12 Schools", image: "/dev/p-2.jpeg" },
-    ]
+    ],
+    relatedServiceIds: [1, 2]
   },
   {
     id: "retail",
@@ -65,6 +70,7 @@ export const projects = [
     subCategories: [
       { id: "showrooms", title: "Showrooms", image: "/imgs/img-1.png" },
       { id: "boutiques", title: "Boutiques", image: "/imgs/img-2.png" },
-    ]
+    ],
+    relatedServiceIds: [2, 3]
   },
 ];

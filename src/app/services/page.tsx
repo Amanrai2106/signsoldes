@@ -119,7 +119,7 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
 
 export default function ServicesPage() {
   return (
-    <div className="bg-gray-50 min-h-screen text-black selection:bg-orange-500/30 overflow-hidden relative">
+    <div className="min-h-screen text-black selection:bg-orange-500/30 overflow-hidden relative">
       {/* Background Ambience */}
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[-10%] right-[-5%] w-[60vw] h-[60vw] bg-orange-100/40 rounded-full blur-[150px]" />
@@ -155,7 +155,7 @@ export default function ServicesPage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 OUR <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-black to-orange-600 bg-300% animate-gradient">
+                <span className="text-orange-600">
                   SERVICES
                 </span>
               </motion.h1>

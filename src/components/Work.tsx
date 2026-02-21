@@ -19,59 +19,46 @@ interface Service {
 const services: Service[] = [
   {
     id: 1,
-    title: "Indoor Signs",
+    title: "Wayfinding Design",
     description:
-      "Custom indoor signage that enhances your interior space and guides your visitors.",
+      "Clear, accessible systems that guide people through spaces with confidence.",
     media: {
       type: "video",
       url: "https://www.youtube.com/embed/dA0VGEbbw4g",
     },
     services: [
-      ["Lobby Signs", "Directional Signs", "ADA Signs", "Room ID"],
-      ["Wall Murals", "Window Graphics", "Floor Graphics", "Safety Signs"],
-      ["Menu Boards", "Digital Displays", "Banners", "Posters"],
+      ["Lobby & Reception", "Directional Signs", "ADA Signs", "Room ID"],
+      ["Campus Wayfinding", "Healthcare Wayfinding", "Digital Signage"],
+      ["Maps & Directories", "Parking & Transit"],
     ],
   },
   {
     id: 2,
-    title: "Outdoor Signs",
+    title: "Experiential Design",
     description:
-      "Durable and high-impact outdoor signs to make your business stand out.",
+      "Immersive brand experiences across retail, events and workplaces.",
     media: {
       type: "video",
-      url: "https://www.youtube.com/embed/lJIrF4YjHfQ", // ✅ embed format
+      url: "https://www.youtube.com/embed/9No-FiEInLA",
     },
     services: [
-      ["Channel Letters", "Monument Signs", "Pylon Signs", "Illuminated Signs"],
-      ["Awning Signs", "Real Estate Signs", "Construction Signs", "Yard Signs"],
+      ["Retail Displays", "POP Systems", "Window Displays"],
+      ["Exhibits & Events", "Trade Show Booths"],
+      ["Office Branding", "Culture Walls"],
     ],
   },
   {
     id: 3,
-    title: "Brand Environments",
+    title: "Art Installations",
     description:
-      "Immersive brand experiences that tell your story through physical space.",
+      "Public art, murals and sculptural installations that elevate spaces.",
     media: {
       type: "video",
-      url: "https://www.youtube.com/embed/9No-FiEInLA", // ✅ embed format
+      url: "https://www.youtube.com/embed/aqz-KE-bpKQ",
     },
     services: [
-      ["Office Branding", "Retail Displays",  "Trade Show Booths"],
-      ["Event Signage", "Experiential Graphics", "Wayfinding Systems", "Collateral"],
-    ],
-  },
-  {
-    id: 4,
-    title: "Architectural Graphics",
-    description:
-      "Integrating graphics into architecture to create unique and memorable environments.",
-    media: {
-      type: "video",
-      url: "https://www.youtube.com/embed/aqz-KE-bpKQ", // ✅ embed format
-    },
-    services: [
-      ["Glass Finishes", "Privacy Films", "Textured Surfaces", ],
-      ["Dimensional Lettering", "Custom Wallcoverings"],
+      ["Monuments & Pylons", "Sculptural Work"],
+      ["Murals & Supergraphics", "Light Installations"],
     ],
   },
 ];

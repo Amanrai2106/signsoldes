@@ -10,7 +10,11 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import TransitionLink from "@/components/TransitionLink";
 
-export default function ServiceSubCategoryPage({ params }: { params: Promise<{ id: string; subId: string }> }) {
+export default function ServiceSubCategoryPage({
+  params,
+}: {
+  params: Promise<{ id: string; subId: string }>;
+}) {
   const { id, subId } = use(params);
   const service = services.find((s) => s.id === Number(id));
   const subCategory = service?.subCategories?.find((s) => s.id === subId);
@@ -22,6 +26,18 @@ export default function ServiceSubCategoryPage({ params }: { params: Promise<{ i
   const subCategoryPosts = posts.filter(
     (p) => p.categoryId === id && p.subCategoryId === subId
   );
+
+  const layoutSpans = [
+    "lg:col-span-2 lg:row-span-2",
+    "lg:row-span-1",
+    "lg:row-span-1",
+    "lg:row-span-2",
+    "lg:col-span-2 lg:row-span-1",
+    "lg:row-span-1",
+    "lg:row-span-1",
+    "lg:row-span-2",
+    "lg:row-span-1",
+  ];
 
   return (
     <main className="bg-white min-h-screen text-black selection:bg-orange-500/30">
@@ -54,40 +70,50 @@ export default function ServiceSubCategoryPage({ params }: { params: Promise<{ i
         </div>
       </section>
 
-      {/* Posts Grid */}
-      <section className="py-20 px-6 md:px-12">
-        <div className="w-full max-w-[95%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {/* Posts Grid - Bento layout */}
+      <section className="py-20 px-[5px]">
+        <div className="w-full max-w-none mx-auto">
           {subCategoryPosts.length > 0 ? (
-            subCategoryPosts.map((post, index) => (
-              <TransitionLink key={post.id} href={`/services/${id}/${subId}/${post.id}`}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group cursor-pointer"
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[220px] md:auto-rows-[260px] lg:auto-rows-[280px] gap-4 md:gap-6">
+              {subCategoryPosts.map((post, index) => (
+                <TransitionLink
+                  key={post.id}
+                  href={`/services/${id}/${subId}/${post.id}`}
+                  className={`group relative overflow-hidden rounded-3xl bg-gray-100 ${layoutSpans[index] || ""}`}
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100 mb-6 shadow-md hover:shadow-xl transition-all duration-300">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="relative w-full h-full"
+                  >
                     <Image
                       src={post.image}
                       alt={post.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                      <h3 className="text-2xl font-bold text-black group-hover:text-orange-600 transition-colors duration-300">
-                          {post.title}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                      <h3 className="text-xl md:text-2xl font-semibold text-white mb-2">
+                        {post.title}
                       </h3>
-                      <p className="text-gray-600 line-clamp-2">{post.description}</p>
-                  </div>
-                </motion.div>
-              </TransitionLink>
-            ))
+                      <p className="text-xs md:text-sm text-gray-200 line-clamp-2">
+                        {post.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                </TransitionLink>
+              ))}
+            </div>
           ) : (
-            <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
-                <p className="text-xl text-gray-400 mb-4">Coming Soon</p>
-                <p className="text-gray-500">We are currently curating projects for this category.</p>
+            <div className="flex flex-col items-center justify-center py-20 text-center">
+              <p className="text-xl text-gray-400 mb-4">Coming Soon</p>
+              <p className="text-gray-500">
+                We are currently curating projects for this category.
+              </p>
             </div>
           )}
         </div>

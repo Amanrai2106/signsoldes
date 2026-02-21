@@ -113,7 +113,7 @@ const Contact = () => {
   ];
 
   return (
-    <main className="bg-white min-h-screen text-black relative overflow-hidden selection:bg-orange-500/30 font-sans">
+    <main className="min-h-screen text-black relative overflow-hidden selection:bg-orange-500/30 font-sans">
       {/* Ambient Background Effects */}
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
           <div className="absolute top-[-10%] right-[-5%] w-[50vw] h-[50vw] bg-purple-200/40 rounded-full blur-[120px] opacity-50" />
