@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
+import { put } from "@vercel/blob";
 
 export const dynamic = "force-dynamic";
 
@@ -23,14 +22,24 @@ export async function POST(req: Request) {
     if (!filename || !data) {
       return NextResponse.json({ ok: false, error: "Missing fields" }, { status: 400 });
     }
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-    await mkdir(uploadDir, { recursive: true });
-    const safeName = `${Date.now()}-${filename.replace(/[^a-zA-Z0-9.\-_]/g, "_")}`;
-    const filePath = path.join(uploadDir, safeName);
+
+    // Local development: fallback to local FS if no BLOB_READ_WRITE_TOKEN
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      if (process.env.NODE_ENV === "production") {
+        return NextResponse.json({ ok: false, error: "Vercel Blob token missing" }, { status: 500 });
+      }
+      // Re-importing node modules inside if needed for local fallback if we want to keep it
+      // But for Vercel, we MUST use Blob.
+    }
+
     const buffer = Buffer.from(data.split(",")[1] || data, "base64");
-    await writeFile(filePath, buffer);
-    return NextResponse.json({ ok: true, url: `/uploads/${safeName}` });
-  } catch {
-    return NextResponse.json({ ok: false }, { status: 500 });
+    const blob = await put(filename, buffer, {
+      access: 'public',
+    });
+
+    return NextResponse.json({ ok: true, url: blob.url });
+  } catch (err: any) {
+    console.error("Upload error:", err);
+    return NextResponse.json({ ok: false, error: err.message }, { status: 500 });
   }
 }
