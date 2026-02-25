@@ -107,7 +107,7 @@ const ProjectGrid = () => {
           transition={{ delay: 0.2 }}
           className="flex justify-end"
         >
-          <Button href="/projects" variant="primary" className="px-10 py-5 text-lg">
+          <Button href="/projects" variant="primary" className="px-8 py-3 text-base">
             View All Work
           </Button>
         </motion.div>
