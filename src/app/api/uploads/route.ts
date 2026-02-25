@@ -33,8 +33,16 @@ export async function POST(req: Request) {
     }
 
     const buffer = Buffer.from(data.split(",")[1] || data, "base64");
+    // If the store is private, we don't specify access: 'public'
     const blob = await put(filename, buffer, {
-      access: 'public',
+      access: 'public', // Most Vercel Blob stores are public by default for assets
+      addRandomSuffix: true,
+    }).catch(async (err) => {
+      // Fallback if public access is denied
+      if (err.message.includes("private store")) {
+        return await put(filename, buffer, { addRandomSuffix: true });
+      }
+      throw err;
     });
 
     return NextResponse.json({ ok: true, url: blob.url });
