@@ -37,7 +37,7 @@ export default function NewsIdeasPage() {
                 image: n.cover,
                 date: new Date(n.createdAt).toLocaleDateString(),
                 reading: "5 min read",
-                type: "news",
+                type: n.type || "news",
                 category: n.category,
                 tags: parsedTags,
                 topic: n.topic || "none",

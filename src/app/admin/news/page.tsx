@@ -36,6 +36,7 @@ interface NewsItem {
   excerpt: string;
   cover: string;
   category: Category;
+  type: "news" | "idea";
   tags: string[];
   topic: Topic;
   content: string;
@@ -49,6 +50,7 @@ export default function AdminNewsEditor() {
   const [slug, setSlug] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [category, setCategory] = useState<Category>("Education");
+  const [type, setType] = useState<"news" | "idea">("news");
   const [topic, setTopic] = useState<Topic>("none");
   const [tags, setTags] = useState<string>("");
   const [cover, setCover] = useState<string>("");
@@ -109,15 +111,26 @@ export default function AdminNewsEditor() {
   }, []);
 
   const onUploadCover = async (file: File) => {
-    const dataUrl = await readAsDataURL(file);
-    const res = await fetch("/api/uploads", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ filename: file.name, data: dataUrl }),
-    });
-    const json = await res.json();
-    if (json?.ok) {
-      setCover(json.url);
+    setSaving(true);
+    setStatus("Uploading cover...");
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/uploads", {
+        method: "POST",
+        body: formData,
+      });
+      const json = await res.json();
+      if (json?.ok) {
+        setCover(json.url);
+        setStatus("Cover uploaded");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("Upload failed");
+    } finally {
+      setSaving(false);
+      setTimeout(() => setStatus(""), 2000);
     }
   };
 
@@ -194,11 +207,11 @@ export default function AdminNewsEditor() {
   const onInsertImage = async (file: File) => {
     try {
       setStatus("Uploading image...");
-      const dataUrl = await readAsDataURL(file);
+      const formData = new FormData();
+      formData.append("file", file);
       const res = await fetch("/api/uploads", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ filename: file.name, data: dataUrl }),
+        body: formData,
       });
       const json = await res.json();
       if (json?.ok) {
@@ -245,7 +258,7 @@ export default function AdminNewsEditor() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: slug,
-        title, slug, excerpt, cover, category, topic,
+        title, slug, excerpt, cover, category, type, topic,
         tags: tags.split(",").map(t => t.trim()).filter(Boolean),
         content,
         status: finalStatus,
@@ -268,6 +281,7 @@ export default function AdminNewsEditor() {
     setExcerpt(n.excerpt || "");
     setCover(n.cover || "");
     setCategory(n.category || "Education");
+    setType(n.type || "news");
     setTopic(n.topic || "none");
     setTags(Array.isArray(n.tags) ? n.tags.join(", ") : "");
     setPubStatus(n.status || "published");
@@ -438,6 +452,21 @@ export default function AdminNewsEditor() {
                       className="w-full bg-gray-50 border-none rounded-xl p-3 text-sm focus:ring-2 ring-orange-500 outline-none h-24 resize-none"
                       placeholder="Write a brief summary..."
                     />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold uppercase text-gray-500">Post Type</label>
+                    <div className="flex bg-gray-100 p-1 rounded-xl">
+                      {(["news", "idea"] as const).map((t) => (
+                        <button
+                          key={t}
+                          onClick={() => setType(t)}
+                          className={`flex-1 py-1.5 text-[10px] font-bold uppercase rounded-lg transition-all ${type === t ? 'bg-white text-black shadow-sm' : 'text-gray-400 hover:text-black'}`}
+                        >
+                          {t}
+                        </button>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="space-y-2">

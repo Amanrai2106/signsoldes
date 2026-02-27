@@ -54,7 +54,7 @@ export async function POST(req: Request) {
   try {
     if (!isAuthed(req)) return NextResponse.json({ ok: false }, { status: 401 });
     const body = await req.json();
-    const { id, title, slug, excerpt, cover, category, tags, topic, content, status, featured } = body ?? {};
+    const { id, title, slug, excerpt, cover, category, type, tags, topic, content, status, featured } = body ?? {};
     
     if (!id || !title || !slug || !excerpt || !cover || !category || !content) {
       return NextResponse.json({ ok: false, error: "Missing fields" }, { status: 400 });
@@ -66,6 +66,7 @@ export async function POST(req: Request) {
       excerpt,
       cover,
       category,
+      type: type || "news",
       tags: Array.isArray(tags) ? JSON.stringify(tags) : "[]",
       topic: topic || "none",
       content,

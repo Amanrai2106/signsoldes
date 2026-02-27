@@ -100,6 +100,7 @@ model News {
   excerpt   String
   cover     String
   category  String
+  type      String   @default("news") // "news" or "idea"
   tags      String?  // JSON string
   topic     String?  @default("none")
   content   String   // HTML
