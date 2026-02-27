@@ -32,11 +32,21 @@ type Post = {
   scope?: string;
   challengeTitle?: string;
   challengeDescription?: string;
-  challengeItems?: string; // JSON string
+  challengeItems?: string | string[]; // Can be either
   solutionTitle?: string;
   solutionDescription?: string;
-  solutionItems?: string; // JSON string
-  galleryImages?: string; // JSON string
+  solutionItems?: string | { label: string; value: string }[]; // Can be either
+  galleryImages?: string | string[]; // Can be either
+};
+
+const parseJson = (val: any, fallback: any = []) => {
+  if (!val) return fallback;
+  if (typeof val !== 'string') return val;
+  try {
+    return JSON.parse(val);
+  } catch {
+    return fallback;
+  }
 };
 
 export default function ProjectPostPage({ params }: { params: Promise<{ id: string; subId: string; postId: string }> }) {
@@ -59,7 +69,13 @@ export default function ProjectPostPage({ params }: { params: Promise<{ id: stri
           const res = await fetch(`/api/posts/${postId}`, { cache: "no-store" });
           const data = await res.json();
           if (res.ok && data?.ok) {
-            currentPost = data.item;
+            const item = data.item;
+            currentPost = {
+              ...item,
+              challengeItems: parseJson(item.challengeItems),
+              solutionItems: parseJson(item.solutionItems),
+              galleryImages: parseJson(item.galleryImages),
+            };
           }
         } catch {}
 
@@ -315,7 +331,7 @@ export default function ProjectPostPage({ params }: { params: Promise<{ id: stri
                         {post.challengeDescription || `Every project comes with its unique set of constraints. For ${post.title}, the main challenge was balancing the architectural integrity with the need for clear, functional signage and branding elements.`}
                     </p>
                     <ul className="space-y-4">
-                        {(post.challengeItems ? JSON.parse(post.challengeItems) : ['Strict architectural guidelines', 'High-traffic durability requirements', 'Complex wayfinding needs']).map((item: string, i: number) => (
+                        {(Array.isArray(post.challengeItems) ? post.challengeItems : ['Strict architectural guidelines', 'High-traffic durability requirements', 'Complex wayfinding needs']).map((item: string, i: number) => (
                             <li key={i} className="flex items-center gap-3 text-gray-700">
                                 <span className="w-2 h-2 rounded-full bg-orange-500" />
                                 {item}
@@ -355,7 +371,7 @@ export default function ProjectPostPage({ params }: { params: Promise<{ id: stri
             <div className="grid grid-cols-1 lg:grid-cols-2">
                 <div className="relative h-[400px] lg:h-auto min-h-[500px] order-2 lg:order-1">
                     <Image
-                        src={post.galleryImages && JSON.parse(post.galleryImages).length > 0 ? JSON.parse(post.galleryImages)[0] : post.image}
+                        src={Array.isArray(post.galleryImages) && post.galleryImages.length > 0 ? post.galleryImages[0] : post.image}
                         alt="Solution visual"
                         fill
                         className="object-cover"
@@ -369,7 +385,7 @@ export default function ProjectPostPage({ params }: { params: Promise<{ id: stri
                         {post.solutionDescription || "We developed a comprehensive design language that utilizes premium materials and clean lines. The result is a system that not only guides users effectively but also enhances the overall aesthetic of the space."}
                     </p>
                     <div className="grid grid-cols-2 gap-8 mt-4">
-                        {(post.solutionItems ? JSON.parse(post.solutionItems) : [{label: 'Custom Made', value: '100%'}, {label: 'Turnaround', value: '4 Weeks'}]).map((item: any, i: number) => (
+                        {(Array.isArray(post.solutionItems) ? post.solutionItems : [{label: 'Custom Made', value: '100%'}, {label: 'Turnaround', value: '4 Weeks'}]).map((item: any, i: number) => (
                             <div key={i}>
                                 <span className="block text-3xl font-bold text-orange-500 mb-2">{item.value}</span>
                                 <span className="text-sm text-gray-400 uppercase tracking-widest">{item.label}</span>
@@ -381,7 +397,7 @@ export default function ProjectPostPage({ params }: { params: Promise<{ id: stri
         </div>
 
         {/* Gallery Grid */}
-        {post.galleryImages && JSON.parse(post.galleryImages).length > 0 && (
+        {Array.isArray(post.galleryImages) && post.galleryImages.length > 0 && (
           <div className="mt-32">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
               <div>
@@ -390,7 +406,7 @@ export default function ProjectPostPage({ params }: { params: Promise<{ id: stri
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {JSON.parse(post.galleryImages).map((img: string, i: number) => (
+              {post.galleryImages.map((img: string, i: number) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}

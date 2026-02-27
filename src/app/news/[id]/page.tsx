@@ -23,6 +23,12 @@ export default function ArticlePage() {
           const json = await res.json();
           if (json?.ok && json.item) {
             const n = json.item;
+            let parsedTags = [];
+            try {
+              parsedTags = typeof n.tags === 'string' ? JSON.parse(n.tags) : (n.tags || []);
+            } catch {
+              parsedTags = [];
+            }
             setRemote({
               id: n.id,
               title: n.title,
@@ -32,7 +38,7 @@ export default function ArticlePage() {
               reading: "5 min read",
               type: "news",
               category: n.category,
-              tags: n.tags || [],
+              tags: parsedTags,
               content: n.content || "",
             });
           }

@@ -19,9 +19,22 @@ export async function GET() {
   try {
     const dbItems = await (prisma as any)["post"].findMany({ orderBy: { createdAt: "desc" } });
     
+    const parseJson = (val: any) => {
+      if (typeof val !== 'string') return val;
+      try { return JSON.parse(val); } catch { return []; }
+    };
+
+    // Normalize database items (parse JSON strings)
+    const normalizedDbItems = dbItems.map((item: any) => ({
+      ...item,
+      challengeItems: parseJson(item.challengeItems),
+      solutionItems: parseJson(item.solutionItems),
+      galleryImages: parseJson(item.galleryImages),
+    }));
+
     // Merge database items with static items, database items take precedence by ID
-    const mergedItems = [...dbItems];
-    const dbIds = new Set(dbItems.map((item: any) => item.id));
+    const mergedItems = [...normalizedDbItems];
+    const dbIds = new Set(normalizedDbItems.map((item: any) => item.id));
     
     staticPosts.forEach((staticItem: any) => {
       if (!dbIds.has(staticItem.id)) {

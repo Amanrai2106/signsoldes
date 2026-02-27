@@ -23,20 +23,28 @@ export default function NewsIdeasPage() {
         if (res.ok) {
           const json = await res.json();
           if (json?.ok) {
-            const mapped = (json.items as any[]).map((n) => ({
-              id: n.id,
-              title: n.title,
-              excerpt: n.excerpt,
-              image: n.cover,
-              date: new Date(n.createdAt).toLocaleDateString(),
-              reading: "5 min read",
-              type: "news",
-              category: n.category,
-              tags: n.tags || [],
-              topic: n.topic || "none",
-              featured: Boolean(n.featured),
-              status: n.status || "published",
-            }));
+            const mapped = (json.items as any[]).map((n) => {
+              let parsedTags = [];
+              try {
+                parsedTags = typeof n.tags === 'string' ? JSON.parse(n.tags) : (n.tags || []);
+              } catch {
+                parsedTags = [];
+              }
+              return {
+                id: n.id,
+                title: n.title,
+                excerpt: n.excerpt,
+                image: n.cover,
+                date: new Date(n.createdAt).toLocaleDateString(),
+                reading: "5 min read",
+                type: "news",
+                category: n.category,
+                tags: parsedTags,
+                topic: n.topic || "none",
+                featured: Boolean(n.featured),
+                status: n.status || "published",
+              };
+            });
             setRemotePosts(mapped);
           }
         }

@@ -19,7 +19,20 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
     const { id } = await params;
     const item = await (prisma as any)["post"].findUnique({ where: { id } });
     if (!item) return NextResponse.json({ ok: false }, { status: 404 });
-    return NextResponse.json({ ok: true, item });
+    
+    const parseJson = (val: any) => {
+      if (typeof val !== 'string') return val;
+      try { return JSON.parse(val); } catch { return []; }
+    };
+
+    const normalized = {
+      ...item,
+      challengeItems: parseJson(item.challengeItems),
+      solutionItems: parseJson(item.solutionItems),
+      galleryImages: parseJson(item.galleryImages),
+    };
+
+    return NextResponse.json({ ok: true, item: normalized });
   } catch {
     return NextResponse.json({ ok: false }, { status: 500 });
   }

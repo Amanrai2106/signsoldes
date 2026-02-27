@@ -19,7 +19,16 @@ export async function GET() {
     const items = await (prisma as any).news.findMany({
       orderBy: { createdAt: "desc" },
     });
-    return NextResponse.json({ ok: true, items });
+    const normalized = items.map((n: any) => {
+      let tags = [];
+      try {
+        tags = typeof n.tags === 'string' ? JSON.parse(n.tags) : (n.tags || []);
+      } catch {
+        tags = [];
+      }
+      return { ...n, tags };
+    });
+    return NextResponse.json({ ok: true, items: normalized });
   } catch (error: any) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
   }
