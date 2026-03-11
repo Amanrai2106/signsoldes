@@ -21,8 +21,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles = "group relative inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-bold uppercase tracking-wider transition-all duration-300 ease-out hover:scale-[1.02] active:scale-[0.98]";
     
     const variants = {
-      primary: "bg-black text-white hover:bg-orange-500 hover:text-white border border-transparent hover:border-orange-500 shadow-[0_0_20px_-5px_rgba(0,0,0,0.3)]",
-      outline: "bg-transparent text-black border border-black/30 hover:bg-black hover:text-white hover:border-transparent",
+      primary: "bg-black text-white hover:bg-orange-600 hover:text-white border border-transparent shadow-[0_10px_30px_-10px_rgba(249,115,22,0.3)] hover:shadow-[0_15px_40px_-10px_rgba(249,115,22,0.5)]",
+      outline: "bg-transparent text-black border border-black/30 hover:bg-orange-600 hover:text-white hover:border-transparent hover:shadow-[0_15px_40px_-10px_rgba(249,115,22,0.4)]",
     };
 
     const content = (

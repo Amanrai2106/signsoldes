@@ -174,7 +174,7 @@ const Nav = () => {
                 <Button 
                     href="/services" 
                     variant="outline"
-                    className={`hidden md:inline-flex px-6 py-2.5 text-xs transition-colors duration-300 ${isScrolledPastHero ? "border-black text-black hover:bg-black hover:text-white" : "border-white text-white hover:bg-white hover:text-black"}`}
+                    className={`hidden md:inline-flex px-6 py-2.5 text-xs transition-all duration-300 ${isScrolledPastHero ? "border-black text-black hover:bg-orange-600 hover:text-white hover:border-transparent" : "border-white text-white hover:bg-orange-600 hover:text-white hover:border-transparent"}`}
                 >
                     Our Services
                 </Button>
@@ -182,7 +182,7 @@ const Nav = () => {
                 <Button 
                     href={getContactHref()} 
                     variant="primary"
-                    className={`hidden md:inline-flex px-6 py-2.5 text-xs ${isScrolledPastHero ? "bg-orange-600 border-orange-600 text-white hover:bg-orange-700" : "bg-white border-white text-black hover:bg-gray-100"}`}
+                    className={`hidden md:inline-flex px-6 py-2.5 text-xs transition-all duration-300 ${isScrolledPastHero ? "bg-black border-black text-white hover:bg-orange-600 hover:border-transparent" : "bg-white border-white text-black hover:bg-orange-600 hover:text-white hover:border-transparent"}`}
                 >
                     Have a Meeting
                 </Button>
