@@ -12,8 +12,8 @@ export const services = [
       "Campus & Healthcare Wayfinding"
     ],
     subCategories: [
+      { id: "wayfinding-systems", title: "Wayfinding Systems", image: "/wayfinding-hero.jpg" },
       { id: "lobby", title: "Lobby & Reception", image: "/imgs/img-1.png" },
-      { id: "wayfinding", title: "Wayfinding Systems", image: "/imgs/img-2.png" },
       { id: "ada", title: "ADA Compliant", image: "/imgs/img-3.png" },
     ],
     relatedProjectIds: ["office", "commercial", "educational"]
@@ -31,9 +31,9 @@ export const services = [
       "Customer Journey Mapping"
     ],
     subCategories: [
+      { id: "experiential-history", title: "Brand History Walls", image: "/experiential-hero.webp" },
       { id: "retail-displays", title: "Retail Displays", image: "/imgs/img-2.png" },
       { id: "exhibits", title: "Exhibits & Events", image: "/imgs/img-3.png" },
-      { id: "office-branding", title: "Office Branding", image: "/imgs/img-1.png" },
     ],
     relatedProjectIds: ["commercial", "retail", "office"]
   },
@@ -50,8 +50,8 @@ export const services = [
       "Permits & Installation"
     ],
     subCategories: [
+      { id: "art-mural", title: "Murals & Supergraphics", image: "/art-hero.jpeg" },
       { id: "monument", title: "Monuments & Pylons", image: "/dev/p-1.jpeg" },
-      { id: "murals", title: "Murals & Supergraphics", image: "/imgs/img-1.png" },
       { id: "sculptures", title: "Sculptural Installations", image: "/imgs/img-4.jpeg" },
     ],
     relatedProjectIds: ["retail", "commercial", "educational"]

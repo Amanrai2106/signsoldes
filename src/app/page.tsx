@@ -24,6 +24,12 @@ const CoreValues = dynamic(() => import("@/components/CoreValues"), {
 const BrandShowcase = dynamic(() => import("@/components/BrandShowcase"), {
   ssr: false,
 });
+const Testimonials = dynamic(() => import("@/components/Testimonials"), {
+  ssr: false,
+});
+const Newsletter = dynamic(() => import("@/components/Newsletter"), {
+  ssr: false,
+});
 const ProjectGrid = dynamic(() => import("@/components/ProjectGrid"), {
   ssr: false,
 });
@@ -103,10 +109,10 @@ const InProgressWork = () => {
                   <p className="text-xs text-gray-500 uppercase tracking-[0.2em]">
                     {post.subCategoryId}
                   </p>
-                  <h3 className="text-base md:text-lg font-semibold text-black line-clamp-2">
+                  <h3 className="text-lg md:text-xl font-semibold text-black line-clamp-2">
                     {post.title}
                   </h3>
-                  <p className="text-xs md:text-sm text-gray-600 line-clamp-3">
+                  <p className="text-sm md:text-base text-gray-600 line-clamp-3">
                     {post.description}
                   </p>
                   <div className="mt-3">
@@ -148,7 +154,8 @@ export default function Home() {
         {/* <ProjectStack /> */}
         <CoreValues />
         <BrandShowcase />
-        <InProgressWork />
+        <Newsletter />
+        <Testimonials />
         <GetInTouch />
         <Footer />
       </div>

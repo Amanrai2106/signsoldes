@@ -6,13 +6,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { X, ArrowRight, Instagram, Linkedin, Twitter, Dribbble } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 
 const Nav = () => {
   const [hidden, setHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolledPastAbout, setIsScrolledPastAbout] = useState(false);
+  const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
   const { scrollY } = useScroll();
   const pathname = usePathname();
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -20,20 +21,20 @@ const Nav = () => {
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
 
-    // Check if scrolled past "about-grid"
+    // Check if scrolled past "project-grid" (Crafting Digital Excellence)
     if (pathname === '/') {
-        const aboutSection = document.getElementById("about-grid");
-        if (aboutSection) {
-            // We use a small offset (e.g., 100px) to trigger it slightly before or after
-            if (latest >= aboutSection.offsetTop - 100) {
-                setIsScrolledPastAbout(true);
+        const projectSection = document.getElementById("project-grid");
+        if (projectSection) {
+            // Trigger slightly before the section starts
+            if (latest >= projectSection.offsetTop - 80) {
+                setIsScrolledPastHero(true);
             } else {
-                setIsScrolledPastAbout(false);
+                setIsScrolledPastHero(false);
             }
         }
     } else {
-        // On other pages, show background after a small scroll
-        setIsScrolledPastAbout(latest > 50);
+        // On other pages, always show the white background header
+        setIsScrolledPastHero(true);
     }
 
     // Clear previous timeout to reset the "stop" detection
@@ -132,17 +133,17 @@ const Nav = () => {
             }}
             animate={hidden ? "hidden" : "visible"}
             transition={{ duration: 0.35, ease: "easeInOut" }}
-            className={`fixed top-0 left-0 right-0 z-[9999] transition-colors duration-500 ${isScrolledPastAbout ? "bg-white/90 backdrop-blur-sm border-b border-black/10" : ""}`}
+            className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-500 ${isScrolledPastHero ? "bg-white/90 backdrop-blur-sm border-b border-black/10 py-4" : "bg-transparent py-6"}`}
           >
-            <div className="mx-auto w-[96vw] max-w-[1600px] px-6 md:px-12 py-5 flex justify-between items-center">
+            <div className="mx-auto w-[96vw] max-w-[1600px] px-6 md:px-12 flex justify-between items-center">
               <div className="flex items-center gap-6">
                   <button 
                     onClick={toggleMenu} 
                     className="group flex items-center gap-3 cursor-pointer outline-none"
                   >
                       <div className="flex flex-col gap-1.5 w-8">
-                          <span className={`block w-full h-[2px] transition-colors bg-black group-hover:bg-gray-600`}></span>
-                          <span className={`block w-2/3 h-[2px] transition-colors group-hover:w-full bg-black group-hover:bg-gray-600`}></span>
+                          <span className={`block w-full h-[2px] transition-colors ${isScrolledPastHero ? "bg-black" : "bg-white"} group-hover:bg-gray-400`}></span>
+                          <span className={`block w-2/3 h-[2px] transition-colors group-hover:w-full ${isScrolledPastHero ? "bg-black" : "bg-white"} group-hover:bg-gray-400`}></span>
                       </div>
                   </button>
       
@@ -151,14 +152,13 @@ const Nav = () => {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5 }}
-                      className="cursor-pointer relative h-16 w-44"
+                      className="cursor-pointer relative h-12 w-48"
                     >
                       <Image 
-                        src="/logo-purple.png" 
+                        src={isScrolledPastHero ? "/logo-purple.png" : "/logo.png"} 
                         alt="Signsol Logo" 
                         fill
-                        className="object-contain"
-                        sizes="(max-width: 768px) 120px, 180px"
+                        className="object-contain object-left"
                         priority
                       />
                     </motion.div>
@@ -174,7 +174,7 @@ const Nav = () => {
                 <Button 
                     href="/services" 
                     variant="outline"
-                    className={`hidden md:inline-flex px-6 py-2.5 text-xs hover:bg-black hover:text-white hover:border-black border-black text-black`}
+                    className={`hidden md:inline-flex px-6 py-2.5 text-xs transition-colors duration-300 ${isScrolledPastHero ? "border-black text-black hover:bg-black hover:text-white" : "border-white text-white hover:bg-white hover:text-black"}`}
                 >
                     Our Services
                 </Button>
@@ -182,7 +182,7 @@ const Nav = () => {
                 <Button 
                     href={getContactHref()} 
                     variant="primary"
-                    className={`hidden md:inline-flex px-6 py-2.5 text-xs hover:bg-orange-600 hover:text-white hover:border-orange-600`}
+                    className={`hidden md:inline-flex px-6 py-2.5 text-xs ${isScrolledPastHero ? "bg-orange-600 border-orange-600 text-white hover:bg-orange-700" : "bg-white border-white text-black hover:bg-gray-100"}`}
                 >
                     Have a Meeting
                 </Button>
@@ -190,6 +190,33 @@ const Nav = () => {
             </div>
           </motion.nav>
         )}
+
+        {/* Floating WhatsApp Button - Modernized Design */}
+        <motion.a 
+          href="https://wa.me/919819334677" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, scale: 0.5, y: 50 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          whileTap={{ scale: 0.9 }}
+          className="fixed bottom-28 right-8 z-[9998] bg-[#25D366] text-white w-14 h-14 md:w-16 md:h-16 rounded-2xl shadow-[0_15px_30px_rgba(37,211,102,0.4)] hover:shadow-[0_20px_40px_rgba(37,211,102,0.6)] transition-all duration-300 group flex items-center justify-center border-2 border-white/20"
+          aria-label="Chat on WhatsApp"
+        >
+          {/* Pulsing background effect - multiple layers for a softer feel */}
+          <span className="absolute inset-0 rounded-2xl bg-[#25D366] animate-ping opacity-20 group-hover:opacity-0 transition-opacity duration-500"></span>
+          <span className="absolute inset-0 rounded-2xl bg-[#25D366] animate-pulse opacity-10"></span>
+          
+          <FaWhatsapp className="relative z-10 text-3xl md:text-4xl drop-shadow-md transition-transform duration-300 group-hover:scale-110" />
+          
+          {/* Modern Tooltip Label */}
+          <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0 pointer-events-none">
+            <span className="bg-white text-black px-4 py-2 rounded-xl text-sm font-bold shadow-xl border border-black/5 whitespace-nowrap">
+              Chat with us
+            </span>
+            <div className="w-2 h-2 bg-white rotate-45 border-r border-t border-black/5 -ml-3" />
+          </div>
+        </motion.a>
 
         <AnimatePresence mode="wait">
             {isMenuOpen && (

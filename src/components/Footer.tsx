@@ -44,9 +44,9 @@ const Footer = ({ hideContactCta = false }: { hideContactCta?: boolean }) => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="mb-10 relative h-20 w-40"
+                className="mb-10 relative h-16 w-56"
               >
-                 <Image src="/logo-purple.png" alt="Signsol Logo" fill className="object-contain" />
+                 <Image src="/logo-purple.png" alt="Signsol Logo" fill className="object-contain object-left" />
               </motion.div>
               <motion.h2 
                 initial={{ opacity: 0, y: 20 }}

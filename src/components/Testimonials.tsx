@@ -2,124 +2,118 @@
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
-
 import React, { useEffect, useRef } from "react";
+import { Quote } from "lucide-react";
 
 const testimonials = [
   {
     company: "/company/ibm.svg",
     quote:
-      "I needed a creative agency at the top of design thinking and leading-edge in technical capabilities. Bürocratik was a perfect match, they are a very rare kind of agency, one that treats clients with respect while bringing their best thinking and work to meet business needs. Outstanding creative digital work!",
+      "I needed a creative agency at the top of design thinking and leading-edge in technical capabilities. Signsol was a perfect match, they treat clients with respect while bringing their best thinking and work to meet business needs.",
     name: "Sophia Martinez",
     role: "Global Brand Director, IBM",
   },
   {
     company: "/company/delta.svg",
     quote:
-      "We needed a partner who understood both innovation and execution, and that’s exactly what we found. The team translated complex challenges into clear solutions, blending creativity with precision. They didn’t just deliver design — they built experiences that continue to resonate deeply with our customers worldwide.",
+      "We needed a partner who understood both innovation and execution. The team translated complex challenges into clear solutions, blending creativity with precision. They built experiences that resonate deeply.",
     name: "James Carter",
     role: "VP of Customer Experience, Delta",
   },
   {
     company: "/company/unileaver.svg",
     quote:
-      "They’re not just a creative agency — they’re genuine collaborators. Every project felt like a partnership where vision and detail came together seamlessly. Their ability to balance strategic thinking with bold creativity set a new benchmark for us, raising expectations across our global brand teams.",
+      "They’re genuine collaborators. Every project felt like a partnership where vision and detail came together seamlessly. Their ability to balance strategic thinking with bold creativity set a new benchmark.",
     name: "Mandlina Covachiu",
     role: "Global Brand Manager, Unilever",
   },
 ];
 
 const Testimonials = () => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const horizontalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current || !sliderRef.current) return;
     gsap.registerPlugin(ScrollTrigger);
 
-    // Animate heading
-    gsap.from(".Testimonials span", {
-      y: "100%",
-      duration: 0.6,
-      stagger: 0.05,
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 90%",
-      },
-    });
+    const ctx = gsap.context(() => {
+      const horizontal = horizontalRef.current;
+      if (!horizontal) return;
 
-    // Horizontal scroll
-    const slider = sliderRef.current;
-    const sections = slider.querySelectorAll(
-      ".testimonial"
-    ) as NodeListOf<HTMLElement>;
+      const totalWidth = horizontal.scrollWidth - window.innerWidth;
 
-    let totalWidth = 0;
-    sections.forEach((section) => {
-      totalWidth += section.offsetWidth;
-    });
-    totalWidth -= containerRef.current.offsetWidth;
+      if (totalWidth > 0) {
+        gsap.to(horizontal, {
+          x: -totalWidth,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+            start: "top top",
+            end: () => `+=${totalWidth}`,
+          },
+        });
+      }
+    }, containerRef);
 
-    gsap.to(slider, {
-      x: -totalWidth,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        pin: true,
-        scrub: 1,
-        end: () => "+=" + totalWidth,
-        invalidateOnRefresh: true,
-      },
-    });
-
-    ScrollTrigger.refresh();
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={containerRef} className="relative p-6 bg-white text-black">
-      {/* heading */}
-      <div className=" flex flex-col md:flex-row gap-5 md:gap-20 mb-10 p-2">
-        <h2 className="text-3xl max-w-[950px] overflow-hidden Testimonials">
-          <span className="block">Testimonials</span>
-        </h2>
-        <p className="max-w-[280px] md:max-w-sm text-sm leading-[1] text-gray-600">
-          {"Paper doesn't crash, and websites don't crease and tear, but receiving such positive testimonials after long processes always tugs at our heartstrings."
-            .split(" ")
-            .map((word, idx) => (
-              <span key={idx} className="inline-block overflow-hidden mr-1">
-                <span className="block">{word}</span>
-              </span>
-            ))}
-        </p>
-      </div>
+    <section ref={containerRef} className="bg-black text-white overflow-hidden">
+      <div className="min-h-screen flex flex-col justify-center py-20">
+        <div className="px-6 md:px-20 mb-20">
+          <div className="flex items-center gap-3 text-orange-500 font-mono text-sm tracking-widest uppercase mb-6">
+            <span className="w-12 h-px bg-orange-500"></span>
+            <span>Testimonials</span>
+          </div>
+          <h2 className="text-5xl md:text-8xl font-bold tracking-tighter leading-none">
+            TRUSTED BY <br />
+            <span className="text-gray-600 italic font-serif">INDUSTRY LEADERS</span>
+          </h2>
+        </div>
 
-      {/* horizontal track */}
-      <div className="overflow-hidden">
-        <div ref={sliderRef} className="flex h-[80vh]">
-          {testimonials.map((review, idx) => (
-            <div
-              key={idx}
-              className="testimonial shrink-0 w-screen md:w-[60vw] flex flex-col justify-center p-2 md:p-8"
-            >
-              <Image
-                src={review.company}
-                alt=""
-                width={64}
-                height={64}
-                className="size-16 mb-6 invert"
-              />
-              <p className="text-lg sm:text-xl md:text-3xl font-medium leading-snug mb-6  pr-4 sm:pr-16">
-                “{review.quote}”
-              </p>
-              <div className="text-lg">
-                <h2 className="font-semibold">{review.name}</h2>
-                <h4 className="text-gray-500">{review.role}</h4>
+        <div className="relative">
+          <div 
+            ref={horizontalRef} 
+            className="flex gap-10 px-6 md:px-20 w-max"
+          >
+            {testimonials.map((t, i) => (
+              <div 
+                key={i} 
+                className="w-[85vw] md:w-[600px] shrink-0 bg-white/5 backdrop-blur-sm border border-white/10 p-10 md:p-16 flex flex-col justify-between group hover:bg-white/10 transition-colors duration-500"
+              >
+                <div>
+                  <Quote className="w-12 h-12 text-orange-500 mb-10 opacity-50 group-hover:opacity-100 transition-opacity" />
+                  <p className="text-2xl md:text-3xl font-medium leading-relaxed mb-12">
+                    {t.quote}
+                  </p>
+                </div>
+                
+                <div className="flex items-center gap-6">
+                  <div className="w-16 h-16 relative grayscale brightness-200 opacity-50 group-hover:opacity-100 transition-all">
+                    <Image
+                      src={t.company}
+                      alt={t.name}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-white">{t.name}</h4>
+                    <p className="text-gray-500 uppercase tracking-widest text-xs mt-1">{t.role}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+            {/* Spacer for end of scroll */}
+            <div className="w-[20vw] shrink-0" />
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

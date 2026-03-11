@@ -38,7 +38,7 @@ const ProjectGrid = () => {
   ];
 
   return (
-    <section className="py-24 bg-white px-[5px] overflow-hidden">
+    <section id="project-grid" className="py-24 bg-white px-[5px] overflow-hidden">
       <div className="w-full max-w-none mx-auto text-center">
         <div className="flex flex-col items-center mb-16 gap-8">
           <div className="max-w-3xl">
@@ -72,7 +72,7 @@ const ProjectGrid = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className={`group relative overflow-hidden rounded-3xl bg-gray-100 ${layoutSpans[idx] || ""}`}
+              className={`group relative overflow-hidden bg-gray-100 ${layoutSpans[idx] || ""}`}
             >
               <Image
                 src={post.image}

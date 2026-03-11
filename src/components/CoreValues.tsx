@@ -155,7 +155,7 @@ const CoreValues = () => {
                     >
                         {/* Card Content */}
                         <div 
-                            className={`w-full h-full rounded-[2rem] p-8 md:p-10 flex flex-col justify-between transition-all duration-500 border ${
+                            className={`w-full h-full p-8 md:p-10 flex flex-col justify-between transition-all duration-500 border ${
                                 isActive 
                                     ? "bg-white border-black/10 shadow-[0_0_50px_-10px_rgba(0,0,0,0.1)]" 
                                     : "bg-gray-50 border-black/5 shadow-xl brightness-95 grayscale-[50%]"
@@ -178,7 +178,7 @@ const CoreValues = () => {
                                 <h3 className={`text-3xl md:text-4xl font-bold mb-6 leading-tight ${isActive ? "text-black" : "text-gray-500"}`}>
                                     {service.title}
                                 </h3>
-                                <p className={`text-sm md:text-base leading-relaxed ${isActive ? "text-gray-600" : "text-gray-400"}`}>
+                                <p className={`text-base md:text-lg leading-relaxed ${isActive ? "text-gray-600" : "text-gray-400"}`}>
                                     {service.description}
                                 </p>
                             </div>

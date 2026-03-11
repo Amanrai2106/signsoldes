@@ -297,33 +297,33 @@ MapVisualization.displayName = "MapVisualization";
 
 const AboutGrid = () => {
   return (
-    <section id="about-grid" className="bg-white text-black font-inter">
+    <section id="about-grid" className="bg-white text-black font-sans">
       <div className="w-full flex flex-col">
         <div className="flex flex-col w-full">
           <ScrollRotateCard className="w-full border-b border-black/5 bg-white py-16 md:py-24 px-[5px]">
-            <div className="w-full bg-white rounded-[2.5rem] shadow-[0_30px_80px_rgba(15,23,42,0.12)] overflow-hidden flex flex-col md:flex-row">
+            <div className="w-full bg-white shadow-[0_30px_80px_rgba(15,23,42,0.12)] overflow-hidden flex flex-col md:flex-row">
               <div className="flex-1 px-6 py-10 md:px-12 md:py-16 flex flex-col justify-center gap-6">
                 <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-orange-500">
-                  Signsol Design Book
+                  Signsol Wayfinding Category
                 </p>
                 <div className="space-y-4">
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight text-black">
-                    Graphic connections<br />in architecture.
+                    Expert navigation<br />systems.
                   </h2>
-                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                    Architectural signage at Signsol Design is about linking people,
-                    buildings and brands. We create systems that are easy to read and
-                    feel naturally built into every space.
+                  <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
+                    Wayfinding at Signsol is about creating intuitive paths through complex spaces. 
+                    We design strategic navigation systems that guide people seamlessly while 
+                    integrating with the architectural character.
                   </p>
                 </div>
-                <p className="text-sm md:text-base text-gray-500 leading-relaxed">
-                  From façade identities and parking guidance to lobby directories and
-                  safety information, each sign is detailed to support the architecture
-                  and the experience of moving through a place.
+                <p className="text-xl md:text-2xl text-gray-500 leading-relaxed">
+                  Our category expertise spans from master-planning campus navigation to 
+                  detailed interior directional systems, ensuring every touchpoint enhances 
+                  clarity, safety, and the overall user journey.
                 </p>
                 <div className="pt-2 flex flex-wrap items-center gap-4">
-                  <TransitionLink href="/about" className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm md:text-base font-medium text-white hover:bg-orange-500 transition-colors">
-                    Book details
+                  <TransitionLink href="/services" className="inline-flex items-center gap-2 rounded-full bg-black px-8 py-4 text-base md:text-lg font-medium text-white hover:bg-orange-500 transition-colors">
+                    View services
                     <span className="text-lg leading-none">→</span>
                   </TransitionLink>
                   <p className="hidden md:flex items-center gap-2 text-xs text-gray-400 uppercase tracking-[0.2em]">
@@ -335,7 +335,7 @@ const AboutGrid = () => {
               </div>
               <div className="flex-1 relative min-h-[260px] md:min-h-[380px] lg:min-h-[440px] bg-gray-100 overflow-hidden">
                 <Image
-                  src="/dev/p-4.jpeg"
+                  src="/wayfinding-category.jpg"
                   alt="Signage and wayfinding design"
                   fill
                   className="object-cover"

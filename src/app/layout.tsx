@@ -1,24 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Aboreto } from "next/font/google";
 import "./globals.css";
 import ScrollProvider from "@/hooks/ScrollProvider";
 import ScrollToTop from "@/components/ScrollToTop";
 import Cursor from "@/components/Cursor";
-
-// Inter
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-// Aboreto
-const aboreto = Aboreto({
-  variable: "--font-aboreto",
-  subsets: ["latin"],
-  weight: "400", // Aboreto only has one weight
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Signsol Design",
@@ -46,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${aboreto.variable} antialiased overflow-x-hidden lg:cursor-none`}>
+      <body className={`antialiased overflow-x-hidden lg:cursor-none`}>
         <Suspense fallback={null}>
           <PageTransitionProvider>
             <ScrollProvider>

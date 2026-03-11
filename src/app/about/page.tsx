@@ -158,18 +158,20 @@ const AboutPage = () => {
               transition={{ duration: 1, delay: 0.2 }}
               className="lg:col-span-5 relative mt-12 lg:mt-0"
             >
-              <div className="aspect-[4/5] rounded-[2rem] overflow-hidden bg-white border border-black/5 shadow-2xl relative group">
+              <div className="aspect-[4/5] overflow-hidden bg-white border border-black/5 shadow-2xl relative group h-full">
                 <Image 
-                  src="https://cdn.pixabay.com/photo/2017/08/06/01/43/architecture-2597991_1280.jpg" 
-                  alt="Architectural connection" 
+                  src="/about-hero.jpeg" 
+                  alt="Signsol Architectural connection" 
                   fill 
                   className="object-cover group-hover:scale-105 transition-transform duration-[2s]"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               </div>
               
               {/* Stats Overlay - Adjusted positioning to avoid overlap */}
-              <div className="absolute -bottom-8 -left-8 bg-white p-8 rounded-[2rem] border border-black/5 shadow-2xl hidden 2xl:block z-20">
+              <div className="absolute -bottom-8 -left-8 bg-white p-8 border border-black/5 shadow-2xl hidden 2xl:block z-20">
                 <div className="flex gap-12">
                   <div>
                     <p className="text-4xl font-bold tracking-tighter">12+</p>
@@ -277,55 +279,6 @@ const AboutPage = () => {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-32 bg-white">
-        <div className="w-full max-w-none mx-auto">
-          <div className="px-6 md:px-12 mb-16 flex justify-between items-end">
-            <div className="max-w-3xl">
-              <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-black">Meet Our Team</h2>
-              <p className="text-gray-600 text-xl font-light leading-relaxed">
-                A multidisciplinary group of designers, architects, and strategists.
-              </p>
-            </div>
-          </div>
-
-          {/* Dense Team Grid inspired by RSM Design */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-[2px] bg-gray-200 border-y border-gray-200">
-            {teamMembers.map((member, i) => (
-              <motion.div
-                key={member.id}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.02 }}
-                className="group relative aspect-square bg-white overflow-hidden cursor-pointer"
-              >
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-[1.01] group-hover:scale-110"
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 15vw"
-                />
-                
-                {/* Clean Text Overlay without dark tint to keep image colourful */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 bg-gradient-to-t from-black/80 via-transparent to-transparent">
-                  <p className="text-white font-bold text-sm leading-tight">{member.name}</p>
-                  <p className="text-white/70 text-[10px] uppercase tracking-widest mt-1">{member.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="px-6 md:px-12 mt-8 flex justify-end">
-            <TransitionLink href="/about" className="group inline-flex items-center gap-2 text-black font-bold text-sm uppercase tracking-widest hover:text-orange-600 transition-colors">
-              Meet Our Team
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </TransitionLink>
           </div>
         </div>
       </section>

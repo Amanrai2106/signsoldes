@@ -1,12 +1,24 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'signsol';
+  src: url('/fonts/proximanova-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-
+@font-face {
+  font-family: 'signsol';
+  src: url('/fonts/proximanova-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+  --font-sans: "signsol", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-     --font-aboreto: "Aboreto", cursive;
   --color-background: #f7f9fc;
   --color-light: #444444;
 }
@@ -19,11 +31,21 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 1024px) {
+  html, body {
+    cursor: auto;
+  }
 }
 
 
-h1 {
-  font-family: var(--font-aboreto);
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
 }
 
 
