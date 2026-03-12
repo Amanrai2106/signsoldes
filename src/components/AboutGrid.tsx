@@ -306,21 +306,24 @@ const AboutGrid = () => {
                 <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-orange-500">
                   Signsol Wayfinding Category
                 </p>
-                <div className="space-y-4">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight text-black">
-                    Expert navigation<br />systems.
+                <div className="space-y-6">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight text-black whitespace-nowrap">
+                    Expert navigation systems.
                   </h2>
-                  <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
-                    Wayfinding at Signsol is about creating intuitive paths through complex spaces. 
-                    We design strategic navigation systems that guide people seamlessly while 
-                    integrating with the architectural character.
-                  </p>
+                  <div className="space-y-4">
+                    <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
+                      Wayfinding at Signsol is about creating intuitive paths through complex spaces. 
+                      We design strategic navigation systems that guide people seamlessly while 
+                      integrating with the architectural character.
+                    </p>
+                    <p className="text-xl md:text-2xl text-gray-500 leading-relaxed">
+                      Our category expertise spans from master-planning campus navigation to 
+                      detailed interior directional systems, ensuring every touchpoint enhances 
+                      clarity, safety, and the overall user journey.
+                    </p>
+                  </div>
                 </div>
-                <p className="text-xl md:text-2xl text-gray-500 leading-relaxed">
-                  Our category expertise spans from master-planning campus navigation to 
-                  detailed interior directional systems, ensuring every touchpoint enhances 
-                  clarity, safety, and the overall user journey.
-                </p>
+               
                 <div className="pt-2 flex flex-wrap items-center gap-4">
                   <TransitionLink href="/services" className="inline-flex items-center gap-2 rounded-full bg-black px-8 py-4 text-base md:text-lg font-medium text-white hover:bg-orange-500 transition-colors">
                     View services
