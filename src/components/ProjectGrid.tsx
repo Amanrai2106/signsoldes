@@ -54,20 +54,21 @@ const ProjectGrid = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-6xl md:text-8xl lg:text-[10rem] leading-[0.85] mb-12 font-black tracking-tighter whitespace-nowrap"
+              className="text-6xl md:text-8xl lg:text-[10rem] leading-none mb-12 font-black tracking-tighter whitespace-nowrap uppercase"
             >
-              CRAFTING DIGITAL <br />
-              <span className="text-gray-200 italic">EXCELLENCE</span>
+              CRAFTING DIGITAL <span className="text-gray-200 italic">EXCELLENCE</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="p2 text-gray-400 leading-relaxed max-w-3xl mx-auto opacity-80"
+              className="text-xl md:text-3xl text-gray-400 leading-relaxed max-w-5xl mx-auto opacity-80"
             >
               We blend innovation with precision to transform spaces through 
-              thoughtful wayfinding and high-impact design solutions.
+              thoughtful wayfinding and high-impact design solutions. Our approach 
+              merges strategic navigation with architectural storytelling, ensuring 
+              every journey is intuitive, engaging, and unforgettable.
             </motion.p>
           </div>
         </div>
