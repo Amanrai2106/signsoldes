@@ -74,53 +74,44 @@ const Cursor = () => {
           translateY: "-50%",
         }}
         animate={{
-          rotate: isLoading ? 360 : 0,
-          scale: isClicking ? 0.8 : isHovered ? 1.4 : 1,
+          scale: isClicking ? 0.8 : isHovered ? 1.5 : 1,
         }}
         transition={{
-          rotate: isLoading ? { repeat: Infinity, duration: 1, ease: "linear" } : { duration: 0.3 },
           scale: { type: "spring", damping: 15, stiffness: 300 }
         }}
       >
         <svg
-          width="40"
-          height="40"
-          viewBox="0 0 40 40"
+          width="48"
+          height="48"
+          viewBox="0 0 48 48"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          className="drop-shadow-lg"
         >
-          {/* Arrow Shadow */}
-          <path
-            d="M12 12L28 20L12 28L16 20L12 12Z"
-            fill="#000"
-            fillOpacity="0.1"
-            style={{ transform: "translate(2px, 2px)" }}
-          />
-          {/* Main Arrow - Purple for Brand Consistency */}
-          <path
-            d="M12 12L28 20L12 28L16 20L12 12Z"
-            fill={isHovered ? "#7C3AED" : "white"}
-            stroke="#7C3AED"
-            strokeWidth="2"
-            strokeLinejoin="round"
-          />
-          
-          {/* Trailing effect on hover */}
+          {/* Outer Ring on Hover */}
           <AnimatePresence>
             {isHovered && (
               <motion.circle
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1.2 }}
-                exit={{ opacity: 0, scale: 0.5 }}
-                cx="20"
-                cy="20"
-                r="15"
-                stroke="#7C3AED"
-                strokeWidth="1"
-                strokeDasharray="4 4"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 0.2, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                cx="24"
+                cy="24"
+                r="20"
+                fill="#7C3AED"
               />
             )}
           </AnimatePresence>
+
+          {/* Custom Arrow Shape - Purple */}
+          <path
+            d="M14 14L34 14M14 14L14 34M14 14L34 34"
+            stroke="#7C3AED"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="transition-colors duration-300"
+          />
         </svg>
       </motion.div>
     </div>
