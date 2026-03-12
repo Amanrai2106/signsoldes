@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import TransitionLink from "@/components/TransitionLink";
 import Image from "next/image";
@@ -13,20 +13,17 @@ import { services } from "@/data/services";
 const Nav = () => {
   const [hidden, setHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(pathname !== '/');
   const { scrollY } = useScroll();
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    // Reset state based on pathname immediately
+  React.useEffect(() => {
     if (pathname !== '/') {
       setIsScrolledPastHero(true);
     } else {
-      // For home page, check initial scroll position
-      setIsScrolledPastHero(window.scrollY > 100);
+      setIsScrolledPastHero(scrollY.get() >= (document.getElementById("project-grid")?.offsetTop ?? 0) - 80);
     }
-  }, [pathname]);
+  }, [pathname, scrollY]);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
@@ -258,41 +255,50 @@ const Nav = () => {
                                 
                                 <div className="flex gap-5 md:gap-6 mt-8">
                                     <a href="#" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors"><Instagram size={20} /></a>
-                                    <a href="#" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors"><Linkedin size={20} /></a>
                                     <a href="#" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors"><Twitter size={20} /></a>
+                                    <a href="#" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors"><Linkedin size={20} /></a>
                                     <a href="#" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors"><Dribbble size={20} /></a>
                                 </div>
                              </div>
 
-                             <div className="flex flex-col gap-2">
-                                 <p className="text-gray-500 text-sm tracking-widest uppercase">Office</p>
-                                 <p className="text-lg leading-relaxed text-gray-300">
-                                     Varun Arcade, Ghodbunder Road,<br />
-                                     Manpada, Thane West, Thane,<br />
-                                     Maharashtra 400607
-                                 </p>
+                             <div className="w-full mb-32 relative h-48">
+                                 <Image 
+                                    src="/logo.png" 
+                                    alt="Signsol" 
+                                    fill
+                                    className="object-contain object-left brightness-0 invert"
+                                 />
                              </div>
                          </div>
 
-                         {/* Right Side (Links) */}
-                         <div className="flex-grow bg-[#111] p-12 md:p-24 flex flex-col justify-center">
-                            <motion.div 
+                         {/* Right Side Links */}
+                         <div className="flex-grow flex flex-col justify-center items-end px-12 md:px-24 gap-6 md:gap-8">
+                             <motion.div 
                                 variants={linkContainerVariants}
-                                className="flex flex-col gap-6 md:gap-10"
-                            >
-                                {links.map((link) => (
-                                    <motion.div key={link.name} variants={linkVariants}>
+                                initial="initial"
+                                animate="animate"
+                                className="flex flex-col items-end gap-4 md:gap-6"
+                             >
+                                 {links.map((link, i) => (
+                                     <motion.div 
+                                        key={link.name}
+                                        variants={linkVariants}
+                                        whileHover={{ scale: 1.05, x: -10 }}
+                                        transition={{ type: "spring", stiffness: 300 }}
+                                        custom={i}
+                                        className="text-right overflow-hidden"
+                                     >
                                         <TransitionLink 
                                             href={link.href} 
-                                            className="text-5xl md:text-8xl font-bold tracking-tighter hover:text-orange-500 transition-colors flex items-center gap-6 group"
-                                            onClick={() => setIsMenuOpen(false)}
+                                            onClick={toggleMenu}
+                                            className="group relative flex items-center justify-end gap-4 text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white/90 hover:text-white transition-colors uppercase"
                                         >
-                                            {link.name}
-                                            <ArrowRight className="opacity-0 -translate-x-10 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 w-10 h-10 md:w-16 md:h-16 text-orange-500" />
+                                            <ArrowRight className="w-8 h-8 md:w-12 md:h-12 text-orange-600 opacity-0 -translate-x-8 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out" />
+                                            <span>{link.name}</span>
                                         </TransitionLink>
-                                    </motion.div>
-                                ))}
-                            </motion.div>
+                                     </motion.div>
+                                 ))}
+                             </motion.div>
                          </div>
                     </div>
                 </motion.div>
