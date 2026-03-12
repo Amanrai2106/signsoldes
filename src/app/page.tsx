@@ -59,24 +59,28 @@ const InProgressWork = () => {
   }, []);
 
   return (
-    <section className="bg-white">
+    <section className="bg-white py-24 md:py-32">
       <div className="container-wide">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-          <div className="max-w-2xl">
-            <p className="text-sm font-bold tracking-[0.3em] uppercase text-orange-600 mb-4">
+        <div className="flex flex-col items-center text-center mb-24">
+          <div className="w-full flex flex-col items-center">
+            <p className="text-sm font-bold tracking-[0.4em] uppercase text-orange-600 mb-8">
               In progress
             </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl">
-              Currently crafting <br />new excellence.
+            <h2 className="text-[10vw] font-bold tracking-tighter mb-12 leading-[0.85] text-black uppercase whitespace-nowrap">
+              Crafting New Excellence
             </h2>
+            <p className="text-xl md:text-3xl text-gray-400 max-w-4xl leading-relaxed font-light mb-16 px-6">
+              We blend innovation with precision to transform spaces through 
+              thoughtful wayfinding and high-impact design solutions.
+            </p>
+            <TransitionLink
+              href="/projects"
+              className="group inline-flex items-center gap-6 text-xl font-bold hover:text-orange-600 transition-all duration-300 bg-black text-white px-10 py-5 rounded-full hover:bg-orange-500"
+            >
+              Explore all works
+              <span className="text-2xl leading-none group-hover:translate-x-2 transition-transform duration-300">→</span>
+            </TransitionLink>
           </div>
-          <TransitionLink
-            href="/projects"
-            className="group inline-flex items-center gap-4 text-lg font-bold hover:text-orange-600 transition-colors"
-          >
-            Explore all works
-            <span className="w-12 h-px bg-black group-hover:bg-orange-600 group-hover:w-16 transition-all duration-300" />
-          </TransitionLink>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
