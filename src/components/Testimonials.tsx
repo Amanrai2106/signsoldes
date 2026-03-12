@@ -49,10 +49,10 @@ const Testimonials = () => {
           scrollTrigger: {
             trigger: containerRef.current,
             pin: true,
-            scrub: 1,
+            scrub: 1.5,
             invalidateOnRefresh: true,
-            start: "center center", // Start pinning when container center hits window center
-            end: () => `+=${totalWidth + 1000}`, // Add some extra scroll length
+            start: "top top", // Change back to top top but ensure full visibility
+            end: () => `+=${totalWidth + 500}`,
           },
         });
       }
@@ -63,8 +63,8 @@ const Testimonials = () => {
 
   return (
     <section ref={containerRef} className="bg-black text-white overflow-hidden">
-      <div className="min-h-screen flex flex-col justify-center py-20">
-        <div className="px-6 md:px-20 mb-20">
+      <div className="min-h-screen flex flex-col justify-center py-20 lg:py-32">
+        <div className="px-6 md:px-20 mb-12 md:mb-20">
           <div className="flex items-center gap-3 text-orange-500 font-mono text-sm tracking-widest uppercase mb-6">
             <span className="w-12 h-px bg-orange-500"></span>
             <span>Testimonials</span>
