@@ -71,7 +71,7 @@ const Testimonials = () => {
             <span>Testimonials</span>
           </div>
           <h2 className="text-5xl md:text-8xl font-bold tracking-tighter leading-none whitespace-nowrap">
-            TRUSTED BY <span className="text-white italic font-serif">INDUSTRY LEADERS</span>
+           <span className="text-white italic font-serif">TRUSTED BY INDUSTRY LEADERS</span>
           </h2>
         </div>
 

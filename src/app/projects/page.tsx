@@ -153,29 +153,28 @@ export default function ProjectsPage() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center gap-10"
           >
-            <div className="max-w-4xl text-center">
+            <div className="w-full flex flex-col items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex items-center gap-2 text-orange-600 font-mono text-sm mb-6 tracking-widest uppercase"
+                className="flex items-center gap-2 text-orange-600 font-mono text-sm mb-6 tracking-[0.4em] uppercase"
               >
-                <Sparkles className="w-4 h-4" />
-                <span>Selected Works</span>
+                <span>Our Portfolio</span>
               </motion.div>
               
               <motion.h1 
-                className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-8 leading-none text-black"
+                className="text-[10vw] font-bold tracking-tighter mb-12 leading-[0.85] text-black uppercase text-center whitespace-nowrap"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                OUR <br />
-                PROJECTS
+                Crafting Digital Excellence
               </motion.h1>
               
-              <p className="text-xl md:text-2xl text-gray-600 max-w-2xl leading-relaxed font-light">
-                A showcase of our finest signage and branding projects, demonstrating our commitment to excellence and innovation.
+              <p className="text-xl md:text-3xl text-gray-400 max-w-4xl leading-relaxed font-light text-center px-6">
+                We blend innovation with precision to transform spaces through 
+                thoughtful wayfinding and high-impact design solutions.
               </p>
             </div>
           </motion.div>
