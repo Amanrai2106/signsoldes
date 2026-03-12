@@ -355,7 +355,7 @@ const AboutGrid = () => {
         >
           {/* Background Accent Text */}
           <div className="absolute inset-0 pointer-events-none select-none flex items-center justify-center overflow-hidden">
-            <span className="text-[20vw] font-black text-black/[0.02] leading-none uppercase tracking-tighter">
+            <span className="text-[15vw] font-black text-black/[0.03] leading-none uppercase tracking-tighter whitespace-nowrap">
               WORLDWIDE
             </span>
           </div>
