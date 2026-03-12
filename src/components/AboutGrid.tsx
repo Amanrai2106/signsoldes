@@ -349,31 +349,31 @@ const AboutGrid = () => {
           </ScrollRotateCard>
         </div>
 
-        {/* Card 4: Pan India Presence */}
+        {/* Card 4: Global Presence */}
         <ScrollRotateCard
           className="w-full py-20 md:py-32 bg-gray-50 flex flex-col md:flex-row items-center relative overflow-hidden"
         >
           {/* Background Accent Text */}
           <div className="absolute inset-0 pointer-events-none select-none flex items-center justify-center overflow-hidden">
             <span className="text-[20vw] font-black text-black/[0.02] leading-none uppercase tracking-tighter">
-              PAN INDIA
+              WORLDWIDE
             </span>
           </div>
 
           <div className="container-wide z-10 flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
             <div className="flex-1 max-w-4xl">
                <p className="text-base md:text-lg font-bold text-orange-600 mb-8 uppercase tracking-[0.4em]">
-                Service Reach
+                Global Reach
               </p>
               <h3 className="text-5xl md:text-7xl lg:text-[7.5rem] font-bold mb-10 leading-[0.8] tracking-tighter whitespace-nowrap">
                 Collaborating with <span className="text-gray-300 italic">top architects</span>
               </h3>
               <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl leading-relaxed opacity-90">
-                We provide turn-key signage solutions for projects <span className="text-black font-bold border-b-2 border-orange-500">pan India</span>. From strategy to installation, we ensure your vision is executed flawlessly across any location.
+                We provide turn-key signage solutions for projects <span className="text-black font-bold border-b-2 border-orange-500">all over the world</span>. From strategy to installation, we ensure your vision is executed flawlessly across any continent.
               </p>
               <div className="inline-flex items-center gap-5 px-10 py-5 bg-orange-500/10 text-orange-600 rounded-full border border-orange-500/20 text-xl font-bold uppercase tracking-widest">
                  <span className="w-5 h-5 rounded-full bg-orange-500 animate-pulse shadow-[0_0_20px_rgba(249,115,22,0.6)]"></span>
-                 Nationwide Service
+                 Worldwide Service
               </div>
             </div>
             
