@@ -369,7 +369,10 @@ const AboutGrid = () => {
                 Collaborating with <span className="text-gray-300 italic">top architects</span>
               </h3>
               <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl leading-relaxed opacity-90">
-                We provide turn-key signage solutions for projects <span className="text-black font-bold border-b-2 border-orange-500">all over the world</span>. From strategy to installation, we ensure your vision is executed flawlessly across any continent.
+                We provide turn-key signage solutions for projects <span className="text-black font-bold border-b-2 border-orange-500">all over the world</span>. 
+                From strategy and conceptual design to precision fabrication and global installation, we ensure your brand vision is executed 
+                flawlessly across any continent. Our international expertise allows us to navigate diverse architectural styles and cultural 
+                contexts, delivering world-class wayfinding systems that speak a universal language of excellence.
               </p>
               <div className="inline-flex items-center gap-5 px-10 py-5 bg-orange-500/10 text-orange-600 rounded-full border border-orange-500/20 text-xl font-bold uppercase tracking-widest">
                  <span className="w-5 h-5 rounded-full bg-orange-500 animate-pulse shadow-[0_0_20px_rgba(249,115,22,0.6)]"></span>

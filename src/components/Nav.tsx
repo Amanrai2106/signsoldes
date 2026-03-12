@@ -11,6 +11,7 @@ import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 
 const Nav = () => {
+  const pathname = usePathname();
   const [hidden, setHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(pathname !== '/');
