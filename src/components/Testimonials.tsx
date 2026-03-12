@@ -2,6 +2,7 @@
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import React, { useEffect, useRef } from "react";
 import { Quote } from "lucide-react";
 
@@ -51,8 +52,8 @@ const Testimonials = () => {
             pin: true,
             scrub: 1.5,
             invalidateOnRefresh: true,
-            start: "top top", // Change back to top top but ensure full visibility
-            end: () => `+=${totalWidth + 500}`,
+            start: "top 15%", // Animation starts when the section top reaches 15% of the viewport
+            end: () => `+=${totalWidth + 800}`,
           },
         });
       }
@@ -81,8 +82,12 @@ const Testimonials = () => {
             className="flex gap-10 px-6 md:px-20 w-max"
           >
             {testimonials.map((t, i) => (
-              <div 
+              <motion.div 
                 key={i} 
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.8 }}
                 className="w-[85vw] md:w-[600px] shrink-0 bg-white/5 backdrop-blur-sm border border-white/10 p-10 md:p-16 flex flex-col justify-between group hover:bg-white/10 transition-colors duration-500"
               >
                 <div>
