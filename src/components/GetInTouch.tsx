@@ -38,10 +38,9 @@ const GetInTouch = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-6xl md:text-8xl lg:text-[9rem] font-black tracking-tighter leading-[0.85] mb-10 !text-white"
+                className="text-6xl md:text-8xl lg:text-[9rem] font-black tracking-tighter leading-[0.85] mb-10 !text-white whitespace-nowrap"
             >
-              Have a project <br/>
-              <span className="text-white/60 italic">in mind?</span>
+              Have a project <span className="text-white/60 italic">in mind?</span>
             </motion.h2>
 
             <motion.p 

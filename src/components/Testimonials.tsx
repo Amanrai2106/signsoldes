@@ -52,7 +52,7 @@ const Testimonials = () => {
             pin: true,
             scrub: 1.5,
             invalidateOnRefresh: true,
-            start: "top 15%", // Animation starts when the section top reaches 15% of the viewport
+            start: "top -15%", // Animation starts when the section top reaches 15% of the viewport
             end: () => `+=${totalWidth + 800}`,
           },
         });
@@ -64,22 +64,21 @@ const Testimonials = () => {
 
   return (
     <section ref={containerRef} className="bg-black text-white overflow-hidden">
-      <div className="py-12 md:py-20 flex flex-col justify-center">
-        <div className="px-6 md:px-20 mb-8 md:mb-12">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-[1px] bg-orange-500" />
-            <span className="text-orange-500 text-xs font-bold tracking-[0.3em] uppercase">Testimonials</span>
+      <div className="min-h-screen flex flex-col justify-center py-20 lg:py-32">
+        <div className="px-6 md:px-20 mb-12 md:mb-20">
+          <div className="flex items-center gap-3 text-orange-500 font-mono text-sm tracking-widest uppercase mb-6">
+            <span className="w-12 h-px bg-orange-500"></span>
+            <span>Testimonials</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter italic uppercase leading-none">
-            Trusted by <br />
-            <span className="text-blue-600">industry leaders</span>
+          <h2 className="text-5xl md:text-8xl font-bold tracking-tighter leading-none whitespace-nowrap">
+            TRUSTED BY <span className="text-white italic font-serif">INDUSTRY LEADERS</span>
           </h2>
         </div>
 
         <div className="relative">
           <div 
             ref={horizontalRef} 
-            className="flex gap-8 px-6 md:px-20 w-max"
+            className="flex gap-10 px-6 md:px-20 w-max"
           >
             {testimonials.map((t, i) => (
               <motion.div 
@@ -88,17 +87,17 @@ const Testimonials = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.8 }}
-                className="w-[85vw] md:w-[500px] shrink-0 bg-white/5 backdrop-blur-sm border border-white/10 p-8 md:p-12 flex flex-col justify-between group hover:bg-white/10 transition-colors duration-500"
+                className="w-[85vw] md:w-[600px] shrink-0 bg-white/5 backdrop-blur-sm border border-white/10 p-10 md:p-16 flex flex-col justify-between group hover:bg-white/10 transition-colors duration-500"
               >
                 <div>
-                  <Quote className="w-10 h-10 text-orange-500 mb-8 opacity-50 group-hover:opacity-100 transition-opacity" />
-                  <p className="text-xl md:text-2xl font-medium leading-relaxed mb-10">
+                  <Quote className="w-12 h-12 text-orange-500 mb-10 opacity-50 group-hover:opacity-100 transition-opacity" />
+                  <p className="text-2xl md:text-3xl font-medium leading-relaxed mb-12">
                     {t.quote}
                   </p>
                 </div>
                 
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 relative grayscale brightness-200 opacity-50 group-hover:opacity-100 transition-all">
+                <div className="flex items-center gap-6">
+                  <div className="w-16 h-16 relative grayscale brightness-200 opacity-50 group-hover:opacity-100 transition-all">
                     <Image
                       src={t.company}
                       alt={t.name}
@@ -107,14 +106,14 @@ const Testimonials = () => {
                     />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white">{t.name}</h4>
-                    <p className="text-gray-500 uppercase tracking-widest text-[10px] mt-1">{t.role}</p>
+                    <h4 className="text-xl font-bold text-white">{t.name}</h4>
+                    <p className="text-gray-500 uppercase tracking-widest text-xs mt-1">{t.role}</p>
                   </div>
                 </div>
               </motion.div>
             ))}
             {/* Spacer for end of scroll */}
-            <div className="w-[15vw] shrink-0" />
+            <div className="w-[20vw] shrink-0" />
           </div>
         </div>
       </div>
