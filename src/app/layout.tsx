@@ -36,7 +36,6 @@ export default function RootLayout({
             <ScrollProvider>
               <Cursor />
               {children}
-              <ScrollToTop />
             </ScrollProvider>
           </PageTransitionProvider>
         </Suspense>
