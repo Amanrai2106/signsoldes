@@ -308,19 +308,18 @@ const AboutGrid = () => {
                 </p>
                 <div className="space-y-6">
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight text-black whitespace-nowrap">
-                    Expert navigation systems.
+                    Expert navigation systems
                   </h2>
                   <div className="space-y-4">
                     <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
                       Wayfinding at Signsol is about creating intuitive paths through complex spaces. 
                       We design strategic navigation systems that guide people seamlessly while 
                       integrating with the architectural character.
-                    </p>
-                    <p className="text-xl md:text-2xl text-gray-500 leading-relaxed">
                       Our category expertise spans from master-planning campus navigation to 
                       detailed interior directional systems, ensuring every touchpoint enhances 
                       clarity, safety, and the overall user journey.
                     </p>
+                  
                   </div>
                 </div>
                
@@ -352,22 +351,21 @@ const AboutGrid = () => {
 
         {/* Card 4: Pan India Presence */}
         <ScrollRotateCard
-          className="w-full min-h-[90vh] bg-gray-50 flex flex-col md:flex-row items-center relative overflow-hidden"
+          className="w-full py-32 md:py-48 bg-gray-50 flex flex-col md:flex-row items-center relative overflow-hidden"
         >
           <div className="container-wide z-10 flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
-            <div className="flex-1 max-w-3xl">
-               <p className="text-base md:text-lg font-bold text-orange-600 mb-6 uppercase tracking-[0.4em]">
+            <div className="flex-1 max-w-4xl">
+               <p className="text-base md:text-lg font-bold text-orange-600 mb-8 uppercase tracking-[0.4em]">
                 Service Reach
               </p>
-              <h3 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-10 leading-[0.9] tracking-tighter">
-                Collaborating with <br />
-                <span className="text-gray-300 italic">top architects</span>
+              <h3 className="text-5xl md:text-7xl lg:text-[7rem] font-bold mb-10 leading-[0.85] tracking-tighter whitespace-nowrap">
+                Collaborating with <span className="text-gray-300 italic">top architects</span>
               </h3>
-              <p className="p2 text-gray-600 mb-12 max-w-2xl leading-relaxed opacity-90">
+              <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl leading-relaxed opacity-90">
                 We provide turn-key signage solutions for projects <span className="text-black font-bold border-b-2 border-orange-500">pan India</span>. From strategy to installation, we ensure your vision is executed flawlessly across any location.
               </p>
-              <div className="inline-flex items-center gap-4 px-8 py-4 bg-orange-500/10 text-orange-600 rounded-full border border-orange-500/20 text-lg font-bold uppercase tracking-widest">
-                 <span className="w-4 h-4 rounded-full bg-orange-500 animate-pulse shadow-[0_0_15px_rgba(249,115,22,0.5)]"></span>
+              <div className="inline-flex items-center gap-5 px-10 py-5 bg-orange-500/10 text-orange-600 rounded-full border border-orange-500/20 text-xl font-bold uppercase tracking-widest">
+                 <span className="w-5 h-5 rounded-full bg-orange-500 animate-pulse shadow-[0_0_20px_rgba(249,115,22,0.6)]"></span>
                  Nationwide Service
               </div>
             </div>
