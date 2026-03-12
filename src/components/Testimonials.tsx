@@ -111,7 +111,7 @@ const Testimonials = () => {
                     <p className="text-gray-500 uppercase tracking-widest text-xs mt-1">{t.role}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
             {/* Spacer for end of scroll */}
             <div className="w-[20vw] shrink-0" />
