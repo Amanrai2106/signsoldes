@@ -164,12 +164,12 @@ export default function ProjectsPage() {
               </motion.div>
               
               <motion.h1 
-                className="text-[10vw] font-bold tracking-tighter mb-12 leading-[0.85] text-black uppercase text-center whitespace-nowrap"
+                className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-8 leading-none text-black whitespace-nowrap"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                Crafting Digital Excellence
+                OUR PROJECTS
               </motion.h1>
               
               <p className="text-xl md:text-3xl text-gray-400 max-w-4xl leading-relaxed font-light text-center px-6">
