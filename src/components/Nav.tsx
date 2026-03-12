@@ -198,24 +198,23 @@ const Nav = () => {
           rel="noopener noreferrer"
           initial={{ opacity: 0, scale: 0.5, y: 50 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          whileHover={{ scale: 1.1, rotate: 5 }}
-          whileTap={{ scale: 0.9 }}
-          className="fixed bottom-28 right-8 z-[9998] bg-[#25D366] text-white w-14 h-14 md:w-16 md:h-16 rounded-2xl shadow-[0_15px_30px_rgba(37,211,102,0.4)] hover:shadow-[0_20px_40px_rgba(37,211,102,0.6)] transition-all duration-300 group flex items-center justify-center border-2 border-white/20"
+          whileHover={{ scale: 1.05, y: -5 }}
+          whileTap={{ scale: 0.95 }}
+          className="fixed bottom-8 right-8 z-[9998] bg-[#25D366] text-white px-6 py-4 rounded-full shadow-[0_10px_40px_rgba(37,211,102,0.3)] hover:shadow-[0_20px_50px_rgba(37,211,102,0.5)] transition-all duration-500 group flex items-center gap-3 border border-white/20 backdrop-blur-md"
           aria-label="Chat on WhatsApp"
         >
-          {/* Pulsing background effect - multiple layers for a softer feel */}
-          <span className="absolute inset-0 rounded-2xl bg-[#25D366] animate-ping opacity-20 group-hover:opacity-0 transition-opacity duration-500"></span>
-          <span className="absolute inset-0 rounded-2xl bg-[#25D366] animate-pulse opacity-10"></span>
+          {/* Subtle glow effect */}
+          <span className="absolute inset-0 rounded-full bg-[#25D366] animate-pulse opacity-20 blur-md"></span>
           
-          <FaWhatsapp className="relative z-10 text-3xl md:text-4xl drop-shadow-md transition-transform duration-300 group-hover:scale-110" />
-          
-          {/* Modern Tooltip Label */}
-          <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0 pointer-events-none">
-            <span className="bg-white text-black px-4 py-2 rounded-xl text-sm font-bold shadow-xl border border-black/5 whitespace-nowrap">
+          <div className="relative z-10 flex items-center gap-3">
+            <FaWhatsapp className="text-2xl md:text-3xl drop-shadow-sm transition-transform duration-500 group-hover:scale-110" />
+            <span className="text-sm md:text-base font-bold tracking-tight whitespace-nowrap hidden sm:inline-block">
               Chat with us
             </span>
-            <div className="w-2 h-2 bg-white rotate-45 border-r border-t border-black/5 -ml-3" />
           </div>
+
+          {/* New Message Notification Badge */}
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 rounded-full border-2 border-white animate-bounce"></span>
         </motion.a>
 
         <AnimatePresence mode="wait">
