@@ -351,14 +351,21 @@ const AboutGrid = () => {
 
         {/* Card 4: Pan India Presence */}
         <ScrollRotateCard
-          className="w-full py-32 md:py-48 bg-gray-50 flex flex-col md:flex-row items-center relative overflow-hidden"
+          className="w-full py-20 md:py-32 bg-gray-50 flex flex-col md:flex-row items-center relative overflow-hidden"
         >
+          {/* Background Accent Text */}
+          <div className="absolute inset-0 pointer-events-none select-none flex items-center justify-center overflow-hidden">
+            <span className="text-[20vw] font-black text-black/[0.02] leading-none uppercase tracking-tighter">
+              PAN INDIA
+            </span>
+          </div>
+
           <div className="container-wide z-10 flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
             <div className="flex-1 max-w-4xl">
                <p className="text-base md:text-lg font-bold text-orange-600 mb-8 uppercase tracking-[0.4em]">
                 Service Reach
               </p>
-              <h3 className="text-5xl md:text-7xl lg:text-[7rem] font-bold mb-10 leading-[0.85] tracking-tighter whitespace-nowrap">
+              <h3 className="text-5xl md:text-7xl lg:text-[7.5rem] font-bold mb-10 leading-[0.8] tracking-tighter whitespace-nowrap">
                 Collaborating with <span className="text-gray-300 italic">top architects</span>
               </h3>
               <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl leading-relaxed opacity-90">
@@ -370,7 +377,7 @@ const AboutGrid = () => {
               </div>
             </div>
             
-            <div className="flex-1 w-full md:w-auto h-[400px] md:h-[600px] relative opacity-40 md:opacity-100 pointer-events-none scale-110 md:scale-125">
+            <div className="flex-1 w-full md:w-auto h-[400px] md:h-[600px] relative opacity-60 md:opacity-100 pointer-events-none scale-125 md:scale-150">
                <MapVisualization />
             </div>
           </div>
