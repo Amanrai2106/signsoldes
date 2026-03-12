@@ -191,30 +191,32 @@ const Nav = () => {
           </motion.nav>
         )}
 
-        {/* Floating WhatsApp Button - Modernized Design */}
+        {/* Floating WhatsApp Button - Compact & Sleek */}
         <motion.a 
           href="https://wa.me/919819334677" 
           target="_blank" 
           rel="noopener noreferrer"
           initial={{ opacity: 0, scale: 0.5, y: 50 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          whileHover={{ scale: 1.05, y: -5 }}
-          whileTap={{ scale: 0.95 }}
-          className="fixed bottom-8 right-8 z-[9998] bg-[#25D366] text-white px-6 py-4 rounded-full shadow-[0_10px_40px_rgba(37,211,102,0.3)] hover:shadow-[0_20px_50px_rgba(37,211,102,0.5)] transition-all duration-500 group flex items-center gap-3 border border-white/20 backdrop-blur-md"
+          whileHover={{ scale: 1.1, y: -5 }}
+          whileTap={{ scale: 0.9 }}
+          className="fixed bottom-8 right-8 z-[9998] bg-[#25D366] text-white w-14 h-14 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.3)] hover:shadow-[0_15px_40px_rgba(37,211,102,0.5)] transition-all duration-500 group flex items-center justify-center border border-white/20"
           aria-label="Chat on WhatsApp"
         >
           {/* Subtle glow effect */}
-          <span className="absolute inset-0 rounded-full bg-[#25D366] animate-pulse opacity-20 blur-md"></span>
+          <span className="absolute inset-0 rounded-full bg-[#25D366] animate-pulse opacity-20 blur-sm"></span>
           
-          <div className="relative z-10 flex items-center gap-3">
-            <FaWhatsapp className="text-2xl md:text-3xl drop-shadow-sm transition-transform duration-500 group-hover:scale-110" />
-            <span className="text-sm md:text-base font-bold tracking-tight whitespace-nowrap hidden sm:inline-block">
+          <FaWhatsapp className="relative z-10 text-3xl drop-shadow-sm transition-transform duration-500 group-hover:scale-110" />
+
+          {/* New Message Notification Badge */}
+          <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-orange-500 rounded-full border-2 border-white animate-bounce"></span>
+          
+          {/* Tooltip on Hover */}
+          <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0 pointer-events-none">
+            <span className="bg-white text-black px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg border border-black/5 whitespace-nowrap">
               Chat with us
             </span>
           </div>
-
-          {/* New Message Notification Badge */}
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 rounded-full border-2 border-white animate-bounce"></span>
         </motion.a>
 
         <AnimatePresence mode="wait">
