@@ -7,25 +7,25 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    company: "/company/ibm.svg",
+    company: "/company/indiabulls.png",
     quote:
       "I needed a creative agency at the top of design thinking and leading-edge in technical capabilities. Signsol was a perfect match, they treat clients with respect while bringing their best thinking and work to meet business needs.",
     name: "Sophia Martinez",
-    role: "Global Brand Director, IBM",
+    role: "Global Brand Director, Indiabulls",
   },
   {
-    company: "/company/delta.svg",
+    company: "/company/adani.png",
     quote:
       "We needed a partner who understood both innovation and execution. The team translated complex challenges into clear solutions, blending creativity with precision. They built experiences that resonate deeply.",
     name: "James Carter",
-    role: "VP of Customer Experience, Delta",
+    role: "VP of Customer Experience, Adani",
   },
   {
-    company: "/company/unileaver.svg",
+    company: "/company/Godrej_Logo.svg.png",
     quote:
       "They’re genuine collaborators. Every project felt like a partnership where vision and detail came together seamlessly. Their ability to balance strategic thinking with bold creativity set a new benchmark.",
     name: "Mandlina Covachiu",
-    role: "Global Brand Manager, Unilever",
+    role: "Global Brand Manager, Godrej",
   },
 ];
 
@@ -51,8 +51,8 @@ const Testimonials = () => {
             pin: true,
             scrub: 1,
             invalidateOnRefresh: true,
-            start: "top top",
-            end: () => `+=${totalWidth}`,
+            start: "center center", // Start pinning when container center hits window center
+            end: () => `+=${totalWidth + 1000}`, // Add some extra scroll length
           },
         });
       }
