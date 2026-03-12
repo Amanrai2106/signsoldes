@@ -161,7 +161,7 @@ export default function SubCategoryPage({ params }: { params: Promise<{ id: stri
                 <TransitionLink
                   key={post.id}
                   href={`/projects/${id}/${subId}/${post.id}`}
-                  className={`group relative overflow-hidden rounded-3xl bg-gray-100 ${layoutSpans[index] || ""}`}
+                  className={`group relative overflow-hidden bg-gray-100 ${layoutSpans[index] || ""}`}
                 >
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}

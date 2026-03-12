@@ -233,7 +233,7 @@ function ServicesGrid() {
         const img =
           service.subCategories && service.subCategories.length
             ? service.subCategories[0].image
-            : "/imgs/img-1.png";
+            : "/img-1.jpeg";
         const imageFirst = index % 2 === 0;
         return (
           <motion.section
@@ -241,7 +241,7 @@ function ServicesGrid() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="rounded-3xl border border-gray-200 bg-white shadow-xl shadow-gray-200/40 overflow-hidden"
+            className="border border-gray-200 bg-white shadow-xl shadow-gray-200/40 overflow-hidden"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 md:min-h-[85vh]">
               {imageFirst && (

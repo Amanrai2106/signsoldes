@@ -93,7 +93,7 @@ const InProgressWork = () => {
                 transition={{ delay: index * 0.1, duration: 0.8 }}
                 className="flex flex-col"
               >
-                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 mb-8">
+                <div className="relative w-full aspect-[4/5] overflow-hidden bg-gray-100 mb-8">
                   <Image
                     src={post.image}
                     alt={post.title}

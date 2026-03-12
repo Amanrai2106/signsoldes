@@ -166,7 +166,7 @@ export default function ServiceSubCategoryPage({
                 <TransitionLink
                   key={post.id}
                   href={`/services/${id}/${subId}/${post.id}`}
-                  className={`group relative overflow-hidden rounded-3xl bg-gray-100 ${layoutSpans[index] || ""}`}
+                  className={`group relative overflow-hidden bg-gray-100 ${layoutSpans[index] || ""}`}
                 >
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}

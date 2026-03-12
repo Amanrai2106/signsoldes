@@ -247,7 +247,7 @@ function FeaturedPostsGrid() {
                 href={`/projects/${post.categoryId}/${post.subCategoryId}/${post.id}`}
                 className="block"
               >
-                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-gray-100 mb-6">
+                <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 mb-6">
                   <Image
                     src={post.image}
                     alt={post.title}
@@ -303,11 +303,11 @@ function ProjectsGrid() {
       title: "Wayfinding",
       description:
         "Campus, healthcare and large-format directional systems that keep people moving confidently through complex spaces.",
-      src: "/imgs/img-2.png",
+      src: "/img-2.jpeg",
       subCategories: [
         { id: "campus", title: "Campus & Institutions", image: "/dev/p-1.jpeg" },
-        { id: "healthcare", title: "Hospitals & Healthcare", image: "/imgs/img-3.png" },
-        { id: "infrastructure", title: "Transit & Infrastructure", image: "/imgs/img-4.jpeg" },
+        { id: "healthcare", title: "Hospitals & Healthcare", image: "/img-3.jpeg" },
+        { id: "infrastructure", title: "Transit & Infrastructure", image: "/img-4.jpeg" },
       ],
       href: "/services/1",
     },
@@ -318,9 +318,9 @@ function ProjectsGrid() {
         "Immersive brand environments across retail, workplaces and events that turn visitors into engaged participants.",
       src: "/dev/p-2.jpeg",
       subCategories: [
-        { id: "retail", title: "Retail Experiences", image: "/imgs/img-1.png" },
-        { id: "workplace", title: "Workplace Branding", image: "/imgs/img-2.png" },
-        { id: "events", title: "Exhibits & Events", image: "/imgs/img-3.png" },
+        { id: "retail", title: "Retail Experiences", image: "/img-1.jpeg" },
+        { id: "workplace", title: "Workplace Branding", image: "/img-2.jpeg" },
+        { id: "events", title: "Exhibits & Events", image: "/img-3.jpeg" },
       ],
       href: "/services/2",
     },
@@ -332,8 +332,8 @@ function ProjectsGrid() {
       src: "/dev/p-1.jpeg",
       subCategories: [
         { id: "public-art", title: "Public Art & Sculptures", image: "/dev/p-1.jpeg" },
-        { id: "murals", title: "Murals & Supergraphics", image: "/imgs/img-1.png" },
-        { id: "light-art", title: "Light & Interactive Art", image: "/imgs/img-4.jpeg" },
+        { id: "murals", title: "Murals & Supergraphics", image: "/img-1.jpeg" },
+        { id: "light-art", title: "Light & Interactive Art", image: "/img-4.jpeg" },
       ],
       href: "/services/3",
     },

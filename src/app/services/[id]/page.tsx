@@ -266,7 +266,7 @@ export default function ServicePage({ params }: { params: Promise<{ id: string }
                       <TransitionLink
                         key={post.id}
                         href={`/services/${id}/${post.subCategoryId}/${post.id}`}
-                        className={`group relative overflow-hidden rounded-3xl bg-gray-200 ${layoutSpans[index] || ""}`}
+                        className={`group relative overflow-hidden bg-gray-200 ${layoutSpans[index] || ""}`}
                       >
                         <motion.div
                           layout

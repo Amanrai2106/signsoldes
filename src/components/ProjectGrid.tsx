@@ -80,7 +80,7 @@ const ProjectGrid = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.05, duration: 0.8 }}
-              className={`group relative overflow-hidden rounded-2xl bg-gray-50 ${layoutSpans[idx] || ""}`}
+              className={`group relative overflow-hidden bg-gray-50 ${layoutSpans[idx] || ""}`}
             >
               <Image
                 src={post.image}

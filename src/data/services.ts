@@ -13,8 +13,8 @@ export const services = [
     ],
     subCategories: [
       { id: "wayfinding-systems", title: "Wayfinding Systems", image: "/wayfinding-hero.jpg" },
-      { id: "lobby", title: "Lobby & Reception", image: "/imgs/img-1.png" },
-      { id: "ada", title: "ADA Compliant", image: "/imgs/img-3.png" },
+      { id: "lobby", title: "Lobby & Reception", image: "/img-1.jpeg" },
+      { id: "ada", title: "ADA Compliant", image: "/img-3.jpeg" },
     ],
     relatedProjectIds: ["office", "commercial", "educational"]
   },
@@ -32,8 +32,8 @@ export const services = [
     ],
     subCategories: [
       { id: "experiential-history", title: "Brand History Walls", image: "/experiential-hero.webp" },
-      { id: "retail-displays", title: "Retail Displays", image: "/imgs/img-2.png" },
-      { id: "exhibits", title: "Exhibits & Events", image: "/imgs/img-3.png" },
+      { id: "retail-displays", title: "Retail Displays", image: "/img-2.jpeg" },
+      { id: "exhibits", title: "Exhibits & Events", image: "/img-3.jpeg" },
     ],
     relatedProjectIds: ["commercial", "retail", "office"]
   },
@@ -51,8 +51,8 @@ export const services = [
     ],
     subCategories: [
       { id: "art-mural", title: "Murals & Supergraphics", image: "/art-hero.jpeg" },
-      { id: "monument", title: "Monuments & Pylons", image: "/dev/p-1.jpeg" },
-      { id: "sculptures", title: "Sculptural Installations", image: "/imgs/img-4.jpeg" },
+      { id: "monument", title: "Monuments & Pylons", image: "/wayfinding-category.jpg" },
+      { id: "sculptures", title: "Sculptural Installations", image: "/img-4.jpeg" },
     ],
     relatedProjectIds: ["retail", "commercial", "educational"]
   }
