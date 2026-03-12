@@ -154,15 +154,6 @@ export default function ProjectsPage() {
             className="flex flex-col items-center gap-10"
           >
             <div className="w-full flex flex-col items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex items-center gap-2 text-orange-600 font-mono text-sm mb-6 tracking-[0.4em] uppercase"
-              >
-                <span>Our Portfolio</span>
-              </motion.div>
-              
               <motion.h1 
                 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-8 leading-none text-black whitespace-nowrap"
                 initial={{ opacity: 0, y: 20 }}
